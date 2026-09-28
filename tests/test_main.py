@@ -30,3 +30,18 @@ def test_template_has_no_personal_archive_logic():
     source = open('today.py', encoding='utf-8').read()
     assert 'MDQ6VXNlcjU3MzMxMTM0' not in source  # Andrew's hardcoded owner id
     assert 'repository_archive' not in source
+
+
+def test_template_svgs_have_no_andrew_personal_data():
+    forbidden = ['andrew', 'agrantnmac', 'ttmtech', 'Andrew6rant', 'TTM Technologies',
+                 'Minecraft Modding', 'Overclocking']
+    for filename in ('dark_mode.svg', 'light_mode.svg'):
+        content = open(filename, encoding='utf-8').read().lower()
+        for needle in forbidden:
+            assert needle.lower() not in content, f'{needle!r} still present in {filename}'
+
+
+def test_template_readme_points_at_this_repo():
+    readme = open('README.md', encoding='utf-8').read()
+    assert 'Andrew6rant' not in readme
+    assert 'maxxqcty/maxxqcty' in readme

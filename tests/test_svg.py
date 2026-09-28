@@ -35,3 +35,13 @@ def test_justify_format_tolerates_missing_dots_id_on_real_dark_svg():
     today.justify_format(tree.getroot(), 'contrib_data', 999)
     element = tree.getroot().find(".//*[@id='contrib_data']")
     assert element.text == '999'
+
+
+def test_svg_overwrite_writes_age_data(tmp_path):
+    target = tmp_path / 'dark_mode.svg'
+    target.write_bytes(open('dark_mode.svg', 'rb').read())
+    today.svg_overwrite(str(target), '21 years, 0 months, 15 days', 10, 20, 30, 40, 50,
+                        ['1,000', '500', '500'])
+    root = etree.parse(str(target)).getroot()
+    age = root.find(".//*[@id='age_data']")
+    assert age is not None and age.text == '21 years, 0 months, 15 days'
