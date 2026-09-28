@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/github/stars/maxxqcty?style=for-the-badge&label=Stars" alt="Stars" />
 </p>
 
-<p align="center">
+<p align="left">
   <a href="https://github.com/maxxqcty/maxxqcty">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maxxqcty/maxxqcty/main/dark_mode.svg">
@@ -20,6 +20,3 @@
   </picture>
 </p>
 
-<p align="center">
-  <img src="https://ghchart.rshah.org/maxxqcty" alt="GitHub contributions" />
-</p>
