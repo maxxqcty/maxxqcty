@@ -35,7 +35,7 @@
 </p>
 
 
-## 🛠️ Tech Stack & Environment
+## 🛠️ ** TECH STACK
 
 
 
