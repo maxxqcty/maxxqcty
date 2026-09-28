@@ -5,12 +5,12 @@ NORMAL = ['#30363d', '#cd3131', '#0dbc79', '#e5e510',
           '#2472c8', '#bc3fbc', '#11a8cd', '#e5e5e5']
 BRIGHT = ['#666666', '#f14c4c', '#23d18b', '#f5f543',
           '#3b8eea', '#d670d6', '#29b8db', '#ffffff']
-ROW_Y = ('430', '454')
-BLOCK_W, BLOCK_H, STEP = 36, 18, 40
+ROW_Y = ('412', '452')
+BLOCK_W, BLOCK_H, STEP = 36, 36, 40
 PANEL_X = 390
 
 BLOCK_RE = re.compile(
-    r'<rect x="(\d+)" y="(\d+)" width="36" height="18"'
+    r'<rect x="(\d+)" y="(\d+)" width="36" height="36"'
     r'(?: fill="(#[0-9a-f]{6})")?[^>]*/>'
 )
 

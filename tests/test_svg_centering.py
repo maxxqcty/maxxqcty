@@ -2,7 +2,7 @@ import re
 
 PANEL_RE = re.compile(r'<text x="390"[^>]*>(.*?)</text>', re.S)
 TSpan_Y_RE = re.compile(r'<tspan[^>]*\by="(\d+)"')
-RECT_RE = re.compile(r'<rect x="\d+" y="(\d+)" width="36" height="18"')
+RECT_RE = re.compile(r'<rect x="\d+" y="(\d+)" width="36" height="36"')
 
 HEADER_Y = 30
 FONT_ASCENT = 12   # body glyph top = baseline - ascent
@@ -23,7 +23,7 @@ def blocks_bottom(filename):
     content = open(filename, encoding='utf-8').read()
     ys = [int(y) for y in RECT_RE.findall(content)]
     assert len(ys) == 16, f'{filename}: found {len(ys)} color blocks'
-    return max(ys) + 18
+    return max(ys) + 36
 
 
 def test_prompt_line_stays_at_the_top():

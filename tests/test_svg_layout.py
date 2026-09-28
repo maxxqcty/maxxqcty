@@ -44,7 +44,7 @@ def test_contact_section_is_gone_and_stats_section_moved_up():
         assert 'Email' not in content and 'LinkedIn' not in content and 'Discord' not in content
         rows = right_column_rows(filename)
         header = next(line for line in rows if '- GitHub Stats' in line)
-        assert 'y="345"' in header
+        assert 'y="327"' in header
         assert 'y="510"' not in '\n'.join(rows)  # stats block no longer sits at the bottom
 
 
