@@ -16,7 +16,7 @@ class FakeResponse:
 def page(edges, total, has_next, cursor=None):
     return FakeResponse({'data': {'user': {'repositories': {
         'totalCount': total,
-        'edges': [{'node': {'nameWithOwner': name, 'stargazers': {'totalCount': stars}}}
+        'edges': [{'node': {'nameWithOwner': name, 'stargazerCount': stars}}
                   for name, stars in edges],
         'pageInfo': {'endCursor': cursor, 'hasNextPage': has_next},
     }}}})
@@ -30,6 +30,15 @@ def test_graph_repos_stars_sums_stars_across_all_pages(monkeypatch):
                         lambda *a, **k: (calls.append(1), next(pages))[1])
     assert today.graph_repos_stars('stars', ['OWNER']) == 22
     assert len(calls) == 2  # followed the cursor
+
+
+def test_graph_repos_stars_uses_stargazercount_scalar_not_stargazers_connection():
+    # GitHub regression (community discussion #202883): the stargazers { totalCount }
+    # connection now returns FORBIDDEN for fine-grained PATs; the stargazerCount
+    # scalar on Repository requires no extra permission
+    source = open('today.py', encoding='utf-8').read()
+    assert 'stargazers {' not in source, 'query still uses the forbidden stargazers connection'
+    assert "node['node']['stargazerCount']" in source, 'stars_counter must read the scalar field'
 
 
 def test_graph_repos_stars_repos_count_needs_no_pagination(monkeypatch):
