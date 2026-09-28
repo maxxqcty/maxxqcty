@@ -1,10 +1,31 @@
 import datetime
 from dateutil import relativedelta
+import json
+import re
 import requests
 import os
 from lxml import etree
 import time
 import hashlib
+
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+
+
+def load_config(path=CONFIG_PATH):
+    """
+    Loads personal settings from config.json, e.g.
+    {'username': 'maxxqcty', 'birthday': datetime.date(2004, 9, 13)}
+    Raises KeyError if a required key is missing, ValueError if the birthday
+    is not formatted YYYY-MM-DD.
+    """
+    with open(path, encoding='utf-8') as f:
+        config = json.load(f)
+    username = config['username']  # KeyError if missing
+    try:
+        birthday = datetime.datetime.strptime(config['birthday'], '%Y-%m-%d').date()
+    except ValueError as err:
+        raise ValueError(f'config.json: birthday must be formatted YYYY-MM-DD') from err
+    return {'username': username, 'birthday': birthday}
 
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
@@ -40,14 +61,52 @@ def format_plural(unit):
     return 's' if unit != 1 else ''
 
 
+CACHE_LINE_PATTERN = re.compile(r'^[0-9a-f]{64}\s+\d+\s+\d+\s+\d+\s+\d+\s*$')
+
+
+def cache_comment_size(lines):
+    """
+    Returns the number of leading comment lines in a cache file:
+    everything before the first line matching the cache data format
+    (64-char repo hash, then 4 integers), e.g. 7 for the template's
+    header block, or len(lines) if the file holds no data yet.
+    """
+    for index, line in enumerate(lines):
+        if CACHE_LINE_PATTERN.match(line):
+            return index
+    return len(lines)
+
+
+MAX_ATTEMPTS = 3
+RETRYABLE_STATUSES = (403, 429, 500, 502, 503, 504)
+
+
 def simple_request(func_name, query, variables):
     """
     Returns a request, or raises an Exception if the response does not succeed.
+    Retries transient failures (GitHub's non-documented 403 abuse limit, rate
+    limits and 5xx) up to MAX_ATTEMPTS times with exponential backoff, and
+    treats a 200 response carrying a GraphQL `errors` payload as a failure
+    (GitHub reports query failures with HTTP 200).
     """
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
-    if request.status_code == 200:
-        return request
-    raise Exception(func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
+    last_error = None
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
+        if request.status_code == 200:
+            payload = request.json()
+            if isinstance(payload, dict) and payload.get('errors'):
+                last_error = f'GraphQL error in {func_name}: {payload["errors"]}'
+            else:
+                return request
+        elif request.status_code in RETRYABLE_STATUSES:
+            last_error = (func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
+        else:
+            raise Exception(func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
+        if attempt < MAX_ATTEMPTS:
+            time.sleep(2 ** (attempt - 1)) # exponential backoff: 1s, 2s
+    if isinstance(last_error, str):
+        raise Exception(last_error)
+    raise Exception(*last_error)
 
 
 def graph_commits(start_date, end_date):
@@ -70,10 +129,14 @@ def graph_commits(start_date, end_date):
     return int(request.json()['data']['user']['contributionsCollection']['contributionCalendar']['totalContributions'])
 
 
-def graph_repos_stars(count_type, owner_affiliation, cursor=None, add_loc=0, del_loc=0):
+def graph_repos_stars(count_type, owner_affiliation, cursor=None, edges=None):
     """
     Uses GitHub's GraphQL v4 API to return my total repository, star, or lines of code count.
+    Star counts are summed over every page of repositories (100 at a time); the
+    repository count comes from totalCount, which is already the full count.
     """
+    if edges is None:
+        edges = []
     query_count('graph_repos_stars')
     query = '''
     query ($owner_affiliation: [RepositoryAffiliation], $login: String!, $cursor: String) {
@@ -99,11 +162,15 @@ def graph_repos_stars(count_type, owner_affiliation, cursor=None, add_loc=0, del
     }'''
     variables = {'owner_affiliation': owner_affiliation, 'login': USER_NAME, 'cursor': cursor}
     request = simple_request(graph_repos_stars.__name__, query, variables)
-    if request.status_code == 200:
-        if count_type == 'repos':
-            return request.json()['data']['user']['repositories']['totalCount']
-        elif count_type == 'stars':
-            return stars_counter(request.json()['data']['user']['repositories']['edges'])
+    repositories = request.json()['data']['user']['repositories']
+    if count_type == 'repos':
+        return repositories['totalCount'] # totalCount covers every page already
+    edges += repositories['edges']
+    if repositories['pageInfo']['hasNextPage']:
+        return graph_repos_stars(count_type, owner_affiliation, repositories['pageInfo']['endCursor'], edges)
+    if count_type == 'stars':
+        return stars_counter(edges)
+    raise ValueError(f'unknown count_type {count_type!r}')
 
 
 def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, deletion_total=0, my_commits=0, cursor=None):
@@ -171,13 +238,15 @@ def loc_counter_one_repo(owner, repo_name, data, cache_comment, history, additio
     else: return recursive_loc(owner, repo_name, data, cache_comment, addition_total, deletion_total, my_commits, history['pageInfo']['endCursor'])
 
 
-def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None, edges=[]):
+def loc_query(owner_affiliation, force_cache=False, cursor=None, edges=None):
     """
     Uses GitHub's GraphQL v4 API to query all the repositories I have access to (with respect to owner_affiliation)
     Queries 60 repos at a time, because larger queries give a 502 timeout error and smaller queries send too many
     requests and also give a 502 error.
     Returns the total number of lines of code in all repositories
     """
+    if edges is None:
+        edges = []
     query_count('loc_query')
     query = '''
     query ($owner_affiliation: [RepositoryAffiliation], $login: String!, $cursor: String) {
@@ -210,33 +279,43 @@ def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None,
     request = simple_request(loc_query.__name__, query, variables)
     if request.json()['data']['user']['repositories']['pageInfo']['hasNextPage']:   # If repository data has another page
         edges += request.json()['data']['user']['repositories']['edges']            # Add on to the LoC count
-        return loc_query(owner_affiliation, comment_size, force_cache, request.json()['data']['user']['repositories']['pageInfo']['endCursor'], edges)
+        return loc_query(owner_affiliation, force_cache, request.json()['data']['user']['repositories']['pageInfo']['endCursor'], edges)
     else:
-        return cache_builder(edges + request.json()['data']['user']['repositories']['edges'], comment_size, force_cache)
+        return cache_builder(edges + request.json()['data']['user']['repositories']['edges'], force_cache)
 
 
-def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
+def cache_filename():
+    """
+    Returns this user's cache file path; the username is hashed so no
+    filename leaks the account name
+    """
+    return 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt'
+
+
+def cache_builder(edges, force_cache=False, filename=None, loc_add=0, loc_del=0):
     """
     Checks each repository in edges to see if it has been updated since the last time it was cached
     If it has, run recursive_loc on that repository to update the LOC count
+    The comment block at the top of the cache file is detected automatically
     """
     cached = True # Assume all repositories are cached
-    filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt' # Create a unique filename for each user
+    if filename is None:
+        filename = cache_filename()
     try:
         with open(filename, 'r') as f:
             data = f.readlines()
     except FileNotFoundError: # If the cache file doesn't exist, create it
         data = []
-        if comment_size > 0:
-            for _ in range(comment_size): data.append('This line is a comment block. Write whatever you want here.\n')
         with open(filename, 'w') as f:
             f.writelines(data)
 
+    comment_size = cache_comment_size(data)
     if len(data)-comment_size != len(edges) or force_cache: # If the number of repos has changed, or force_cache is True
         cached = False
-        flush_cache(edges, filename, comment_size)
+        flush_cache(edges, filename)
         with open(filename, 'r') as f:
             data = f.readlines()
+        comment_size = cache_comment_size(data)
 
     cache_comment = data[:comment_size] # save the comment block
     data = data[comment_size:] # remove those lines
@@ -261,19 +340,25 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
     return [loc_add, loc_del, loc_add - loc_del, cached]
 
 
-def flush_cache(edges, filename, comment_size):
+def flush_cache(edges, filename):
     """
-    Wipes the cache file
-    This is called when the number of repositories changes or when the file is first created
+    Rebuilds the cache file so it lists exactly `edges`.
+    The comment block and the data of repositories still present are preserved
+    (matched by repo hash), so adding or removing a repository does not force a
+    re-walk of every commit; only brand-new repositories start zeroed.
     """
-    with open(filename, 'r') as f:
-        data = []
-        if comment_size > 0:
-            data = f.readlines()[:comment_size] # only save the comment
+    try:
+        with open(filename, 'r') as f:
+            old_lines = f.readlines()
+    except FileNotFoundError:
+        old_lines = []
+    comment_size = cache_comment_size(old_lines)
+    old_by_hash = {line.split()[0]: line for line in old_lines[comment_size:] if line.split()}
     with open(filename, 'w') as f:
-        f.writelines(data)
+        f.writelines(old_lines[:comment_size])
         for node in edges:
-            f.write(hashlib.sha256(node['node']['nameWithOwner'].encode('utf-8')).hexdigest() + ' 0 0 0 0\n')
+            repo_hash = hashlib.sha256(node['node']['nameWithOwner'].encode('utf-8')).hexdigest()
+            f.write(old_by_hash.get(repo_hash, repo_hash + ' 0 0 0 0\n'))
 
 
 def add_archive():
@@ -359,16 +444,17 @@ def find_and_replace(root, element_id, new_text):
         element.text = new_text
 
 
-def commit_counter(comment_size):
+def commit_counter(filename=None):
     """
     Counts up my total commits, using the cache file created by cache_builder.
+    The comment block at the top of the file is detected automatically.
     """
-    total_commits = 0
-    filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt' # Use the same filename as cache_builder
+    if filename is None:
+        filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt'
     with open(filename, 'r') as f:
         data = f.readlines()
-    cache_comment = data[:comment_size] # save the comment block
-    data = data[comment_size:] # remove those lines
+    data = data[cache_comment_size(data):] # remove the comment block
+    total_commits = 0
     for line in data:
         total_commits += int(line.split()[2])
     return total_commits
