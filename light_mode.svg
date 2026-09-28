@@ -16,6 +16,9 @@ size-adjust: 109%;
 text, tspan {white-space: pre;}
 </style>
 <rect width="985px" height="530px" fill="#f6f8fa" rx="15"/>
+<circle cx="22" cy="15" r="8" fill="#ff5f57" stroke="#00000033" stroke-width="1"/>
+<circle cx="44" cy="15" r="8" fill="#febc2e" stroke="#00000033" stroke-width="1"/>
+<circle cx="66" cy="15" r="8" fill="#28c840" stroke="#00000033" stroke-width="1"/>
 <text x="15" y="30" fill="#24292f" class="ascii">
 <tspan x="15" y="30">            ;;,, ,;,|g;~,,                      </tspan>
 <tspan x="15" y="50">         ,g@@@@@@l&amp;$$$@|,w$$@gy,            </tspan>
