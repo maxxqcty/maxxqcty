@@ -70,20 +70,20 @@ text, tspan {white-space: pre;}
 <tspan x="390" y="367" class="cc">. </tspan><tspan class="key">Commmits</tspan>:<tspan class="cc" id="commit_data_dots"> ................... </tspan><tspan class="value" id="commit_data">142</tspan> | <tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ......... </tspan><tspan class="value" id="follower_data">3</tspan>
 <tspan x="390" y="387" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"></tspan><tspan class="value" id="loc_data">1,631,760</tspan> ( <tspan class="addColor" id="loc_add">1,810,142</tspan><tspan class="addColor">++</tspan>, <tspan id="loc_del_dots"></tspan><tspan class="delColor" id="loc_del">178,382</tspan><tspan class="delColor">--</tspan> )
 </text>
-<rect x="390" y="412" width="36" height="36" fill="#586069"/>
-<rect x="430" y="412" width="36" height="36" fill="#ff5555"/>
-<rect x="470" y="412" width="36" height="36" fill="#2ee66d"/>
-<rect x="510" y="412" width="36" height="36" fill="#ffe14d"/>
-<rect x="550" y="412" width="36" height="36" fill="#4d9dff"/>
-<rect x="590" y="412" width="36" height="36" fill="#d24dff"/>
-<rect x="630" y="412" width="36" height="36" fill="#3ee0e6"/>
-<rect x="670" y="412" width="36" height="36" fill="#e8ecf1"/>
-<rect x="390" y="452" width="36" height="36" fill="#7d8590"/>
-<rect x="430" y="452" width="36" height="36" fill="#ff8a80"/>
-<rect x="470" y="452" width="36" height="36" fill="#69f0ae"/>
-<rect x="510" y="452" width="36" height="36" fill="#fff59d"/>
-<rect x="550" y="452" width="36" height="36" fill="#82b1ff"/>
-<rect x="590" y="452" width="36" height="36" fill="#ea80fc"/>
-<rect x="630" y="452" width="36" height="36" fill="#84ffff"/>
-<rect x="670" y="452" width="36" height="36" fill="#ffffff"/>
+<rect x="390" y="412" width="36" height="36" fill="#333a45"/>
+<rect x="430" y="412" width="36" height="36" fill="#e02020"/>
+<rect x="470" y="412" width="36" height="36" fill="#0fb64c"/>
+<rect x="510" y="412" width="36" height="36" fill="#e0b400"/>
+<rect x="550" y="412" width="36" height="36" fill="#1f6feb"/>
+<rect x="590" y="412" width="36" height="36" fill="#a82fd6"/>
+<rect x="630" y="412" width="36" height="36" fill="#0db3c7"/>
+<rect x="670" y="412" width="36" height="36" fill="#c9ced6"/>
+<rect x="390" y="452" width="36" height="36" fill="#5a6472"/>
+<rect x="430" y="452" width="36" height="36" fill="#ff5757"/>
+<rect x="470" y="452" width="36" height="36" fill="#34d877"/>
+<rect x="510" y="452" width="36" height="36" fill="#ffe04a"/>
+<rect x="550" y="452" width="36" height="36" fill="#4ca0ff"/>
+<rect x="590" y="452" width="36" height="36" fill="#c451f0"/>
+<rect x="630" y="452" width="36" height="36" fill="#41dcef"/>
+<rect x="670" y="452" width="36" height="36" fill="#eceff3"/>
 </svg>
