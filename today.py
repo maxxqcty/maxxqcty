@@ -1,6 +1,5 @@
 import datetime
 from dateutil import relativedelta
-import json
 import re
 import requests
 import os
@@ -8,31 +7,13 @@ from lxml import etree
 import time
 import hashlib
 
-CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
-
-
-def load_config(path=CONFIG_PATH):
-    """
-    Loads personal settings from config.json, e.g.
-    {'username': 'maxxqcty', 'birthday': datetime.date(2004, 9, 13)}
-    Raises KeyError if a required key is missing, ValueError if the birthday
-    is not formatted YYYY-MM-DD.
-    """
-    with open(path, encoding='utf-8') as f:
-        config = json.load(f)
-    username = config['username']  # KeyError if missing
-    try:
-        birthday = datetime.datetime.strptime(config['birthday'], '%Y-%m-%d').date()
-    except ValueError as err:
-        raise ValueError(f'config.json: birthday must be formatted YYYY-MM-DD') from err
-    return {'username': username, 'birthday': birthday}
-
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
-USER_NAME = None # set by main() from config.json
+USER_NAME = 'maxxqcty'  # your GitHub username
+BIRTHDAY = datetime.date(2004, 9, 13)  # shown as the Uptime/Age row
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
 
@@ -507,21 +488,18 @@ def formatter(query_type, difference, funct_return=False, whitespace=0):
     return funct_return
 
 
-def main(config_path=CONFIG_PATH):
+def main():
     """
-    Loads personal settings from config.json, fetches every stat from the
-    GitHub GraphQL API and writes both SVG variants.
+    Fetches every stat from the GitHub GraphQL API and writes both SVG variants.
     Andrew Grant (Andrew6rant) wrote the original, 2022-2025.
     """
-    global USER_NAME, OWNER_ID  # recursive_loc reads OWNER_ID as a module global
-    config = load_config(config_path)
-    USER_NAME = config['username']
+    global OWNER_ID  # recursive_loc reads OWNER_ID as a module global
     print('Calculation times:')
     # fetch the account's node id (used to only count commits authored by me) and creation date
     user_data, user_time = perf_counter(user_getter, USER_NAME)
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
-    age_data, age_time = perf_counter(daily_readme, config['birthday'])
+    age_data, age_time = perf_counter(daily_readme, BIRTHDAY)
     formatter('age calculation', age_time)
     total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
