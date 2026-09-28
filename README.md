@@ -16,11 +16,14 @@
 <p align="left">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=maxxqcty&theme=dark&background=161b22&border=ffffff">
-    <img src="https://streak-stats.demolab.com?user=maxxqcty&theme=light&background=f6f8fa&border=d0d7de" alt="GitHub streak" />
+    <img src="https://streak-stats.demolab.com?user=maxxqcty&theme=light&background=f6f8fa&border=d0d7de" alt="GitHub streak" width="400" />
   </picture>
+</p>
+
+<p align="left">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maxxqcty/maxxqcty/main/languages_dark.svg">
-    <img alt="Most used languages" src="https://raw.githubusercontent.com/maxxqcty/maxxqcty/main/languages_light.svg" width="380" />
+    <img alt="Most used languages" src="https://raw.githubusercontent.com/maxxqcty/maxxqcty/main/languages_light.svg" width="400" />
   </picture>
 </p>
 
