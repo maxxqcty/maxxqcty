@@ -515,7 +515,7 @@ def main(config_path=CONFIG_PATH):
     GitHub GraphQL API and writes both SVG variants.
     Andrew Grant (Andrew6rant) wrote the original, 2022-2025.
     """
-    global USER_NAME
+    global USER_NAME, OWNER_ID  # recursive_loc reads OWNER_ID as a module global
     config = load_config(config_path)
     USER_NAME = config['username']
     print('Calculation times:')
