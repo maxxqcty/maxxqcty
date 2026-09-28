@@ -1,8 +1,10 @@
-<p align="center">
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=200&duration=4000&pause=1000&color=07F72C&vCenter=true&width=435&lines=Hi%2C+my+name+is+maxxqcty....;Welcome+to+my+profile!+%3A%29)](https://git.io/typing-svg)
+
+<!-- <p align="center">
   <img src="https://komarev.com/ghpvc/?username=maxxqcty&style=for-the-badge" alt="Profile views" />
   <img src="https://img.shields.io/github/followers/maxxqcty?style=for-the-badge&label=Followers" alt="Followers" />
   <img src="https://img.shields.io/github/stars/maxxqcty?style=for-the-badge&label=Stars" alt="Stars" />
-</p>
+</p> -->
 
 <p align="left">
   <a href="https://github.com/maxxqcty/maxxqcty">
