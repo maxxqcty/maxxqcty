@@ -52,11 +52,12 @@ text, tspan {white-space: pre;}
 </text>
 <text x="390" y="30" fill="#24292f">
 <tspan x="390" y="30">maxxqcty@dev</tspan> -———————————————————————————————————————————-—-
-<tspan x="390" y="87" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">CachyOS, Windows 11</tspan>
-<tspan x="390" y="107" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ...................... </tspan><tspan class="value" id="age_data">22 years, 0 months, 15 days</tspan>
-<tspan x="390" y="127" class="cc">. </tspan><tspan class="key">Machine</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">ThinkPad T460p</tspan>
-<tspan x="390" y="147" class="cc">. </tspan><tspan class="key">Role</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Computer Science Student</tspan>
-<tspan x="390" y="167" class="cc">. </tspan>
+<tspan x="390" y="67" class="cc">. </tspan><tspan class="key">Pronouns</tspan>:<tspan class="cc"> ......................................... </tspan><tspan class="value">He/Him</tspan>
+<tspan x="390" y="87" class="cc">. </tspan><tspan class="key">Location</tspan>:<tspan class="cc"> .................................... </tspan><tspan class="value">Philippines</tspan>
+<tspan x="390" y="107" class="cc">. </tspan><tspan class="key">Role</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Computer Science Student</tspan>
+<tspan x="390" y="127" class="cc">. </tspan>
+<tspan x="390" y="147" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">CachyOS, Windows 11</tspan>
+<tspan x="390" y="167" class="cc">. </tspan><tspan class="key">Machine</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">ThinkPad T460p</tspan>
 <tspan x="390" y="187" class="cc">. </tspan><tspan class="key">Editor</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">Neovim, VS Code</tspan>
 <tspan x="390" y="207" class="cc">. </tspan><tspan class="key">Agents</tspan>:<tspan class="cc"> ............................ </tspan><tspan class="value">Claude Code, OpenCode</tspan>
 <tspan x="390" y="227" class="cc">. </tspan><tspan class="key">Shell</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">zsh, fish, PowerShell</tspan>

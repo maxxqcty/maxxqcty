@@ -1,5 +1,3 @@
-import datetime
-from dateutil import relativedelta
 import re
 import requests
 import os
@@ -13,33 +11,7 @@ import hashlib
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
 USER_NAME = 'maxxqcty'  # your GitHub username
-BIRTHDAY = datetime.date(2004, 9, 13)  # shown as the Uptime/Age row
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
-
-
-def daily_readme(birthday):
-    """
-    Returns the length of time since I was born
-    e.g. 'XX years, XX months, XX days'
-    """
-    diff = relativedelta.relativedelta(datetime.datetime.today(), birthday)
-    return '{} {}, {} {}, {} {}{}'.format(
-        diff.years, 'year' + format_plural(diff.years), 
-        diff.months, 'month' + format_plural(diff.months), 
-        diff.days, 'day' + format_plural(diff.days),
-        ' 🎂' if (diff.months == 0 and diff.days == 0) else '')
-
-
-def format_plural(unit):
-    """
-    Returns a properly formatted number
-    e.g.
-    'day' + format_plural(diff.days) == 5
-    >>> '5 days'
-    'day' + format_plural(diff.days) == 1
-    >>> '1 day'
-    """
-    return 's' if unit != 1 else ''
 
 
 CACHE_LINE_PATTERN = re.compile(r'^[0-9a-f]{64}\s+\d+\s+\d+\s+\d+\s+\d+\s*$')
@@ -359,13 +331,12 @@ def stars_counter(data):
     return total_stars
 
 
-def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data):
+def svg_overwrite(filename, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data):
     """
-    Parse SVG files and update elements with my age, commits, stars, repositories, and lines written
+    Parse SVG files and update elements with my commits, stars, repositories, and lines written
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'age_data', age_data, 49) # 49 matches the pre-rendered dot leader for ~27-char values
     justify_format(root, 'commit_data', commit_data, 22)
     justify_format(root, 'star_data', star_data, 14)
     justify_format(root, 'repo_data', repo_data, 6)
@@ -499,8 +470,6 @@ def main():
     user_data, user_time = perf_counter(user_getter, USER_NAME)
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
-    age_data, age_time = perf_counter(daily_readme, BIRTHDAY)
-    formatter('age calculation', age_time)
     total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
     commit_data, commit_time = perf_counter(commit_counter)
@@ -511,12 +480,12 @@ def main():
 
     for index in range(len(total_loc)-1): total_loc[index] = '{:,}'.format(total_loc[index]) # format added, deleted, and total LOC
 
-    svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
-    svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    svg_overwrite('dark_mode.svg', commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    svg_overwrite('light_mode.svg', commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
 
     # move cursor to override 'Calculation times:' with 'Total function time:' and the total function time, then move cursor back
     print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
-        '{:<21}'.format('Total function time:'), '{:>11}'.format('%.4f' % (user_time + age_time + loc_time + commit_time + star_time + repo_time + contrib_time)),
+        '{:<21}'.format('Total function time:'), '{:>11}'.format('%.4f' % (user_time + loc_time + commit_time + star_time + repo_time + contrib_time)),
         ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
