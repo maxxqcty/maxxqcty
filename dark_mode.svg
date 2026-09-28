@@ -8,18 +8,20 @@ font-display: swap;
 -webkit-size-adjust: 109%;
 size-adjust: 109%;
 }
-.key {fill: #ffa657;}
-.value {fill: #a5d6ff;}
-.addColor {fill: #3fb950;}
-.delColor {fill: #f85149;}
-.cc {fill: #616e7f;}
+.key {fill: #ff9838;}
+.value {fill: #58a6ff;}
+.addColor {fill: #39d353;}
+.delColor {fill: #ff5555;}
+.cc {fill: #8b98ac;}
 text, tspan {white-space: pre;}
 </style>
 <rect width="985px" height="530px" fill="#161b22" rx="15"/>
+<rect x="1" y="1" width="983" height="528" rx="14" fill="none" stroke="#58a6ff" stroke-width="2"/>
+<rect x="382" y="305" width="568" height="94" rx="10" fill="none" stroke="#58a6ff" stroke-width="2"/>
 <circle cx="22" cy="15" r="8" fill="#ff5f57" stroke="#00000033" stroke-width="1"/>
 <circle cx="44" cy="15" r="8" fill="#febc2e" stroke="#00000033" stroke-width="1"/>
 <circle cx="66" cy="15" r="8" fill="#28c840" stroke="#00000033" stroke-width="1"/>
-<text x="15" y="30" fill="#c9d1d9" class="ascii" font-size="12">
+<text x="15" y="30" fill="#e6edf3" class="ascii" font-size="12">
 <tspan x="15" y="42" textLength="370" lengthAdjust="spacingAndGlyphs">⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀</tspan>
 <tspan x="15" y="58" textLength="370" lengthAdjust="spacingAndGlyphs">⢻⢷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⡇</tspan>
 <tspan x="15" y="74" textLength="370" lengthAdjust="spacingAndGlyphs">⢸⠀⠻⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⢤⣶⠶⠶⢶⣶⡤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⢀⠇</tspan>
@@ -50,7 +52,7 @@ text, tspan {white-space: pre;}
 <tspan x="15" y="474" textLength="370" lengthAdjust="spacingAndGlyphs">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⡉⠉⠉⠀⣠⣤⡄⠀⠉⠉⢁⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</tspan>
 <tspan x="15" y="490" textLength="370" lengthAdjust="spacingAndGlyphs">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠲⠤⠞⠋⠀⠙⠶⠤⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</tspan>
 </text>
-<text x="390" y="30" fill="#c9d1d9">
+<text x="390" y="30" fill="#e6edf3">
 <tspan x="390" y="30">maxxqcty@dev</tspan> -———————————————————————————————————————————-—-
 <tspan x="390" y="67" class="cc">. </tspan><tspan class="key">Pronouns</tspan>:<tspan class="cc"> ......................................... </tspan><tspan class="value">He/Him</tspan>
 <tspan x="390" y="87" class="cc">. </tspan><tspan class="key">Location</tspan>:<tspan class="cc"> .................................... </tspan><tspan class="value">Philippines</tspan>
@@ -64,26 +66,25 @@ text, tspan {white-space: pre;}
 <tspan x="390" y="247" class="cc">. </tspan>
 <tspan x="390" y="267" class="cc">. </tspan><tspan class="key">Languages</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">English, Filipino</tspan>
 <tspan x="390" y="287" class="cc">. </tspan><tspan class="key">Hobbies</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">Linux, Homelab, Vibe Coding</tspan>
-<tspan x="390" y="307" class="cc">. </tspan>
 <tspan x="390" y="327">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
 <tspan x="390" y="347" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan><tspan class="value" id="repo_data">27</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">28</tspan>} | <tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ............. </tspan><tspan class="value" id="star_data">3</tspan>
 <tspan x="390" y="367" class="cc">. </tspan><tspan class="key">Commmits</tspan>:<tspan class="cc" id="commit_data_dots"> ................... </tspan><tspan class="value" id="commit_data">142</tspan> | <tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ......... </tspan><tspan class="value" id="follower_data">3</tspan>
 <tspan x="390" y="387" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"></tspan><tspan class="value" id="loc_data">1,631,760</tspan> ( <tspan class="addColor" id="loc_add">1,810,142</tspan><tspan class="addColor">++</tspan>, <tspan id="loc_del_dots"></tspan><tspan class="delColor" id="loc_del">178,382</tspan><tspan class="delColor">--</tspan> )
 </text>
-<rect x="390" y="412" width="36" height="36" fill="#30363d"/>
-<rect x="430" y="412" width="36" height="36" fill="#cd3131"/>
-<rect x="470" y="412" width="36" height="36" fill="#0dbc79"/>
-<rect x="510" y="412" width="36" height="36" fill="#e5e510"/>
-<rect x="550" y="412" width="36" height="36" fill="#2472c8"/>
-<rect x="590" y="412" width="36" height="36" fill="#bc3fbc"/>
-<rect x="630" y="412" width="36" height="36" fill="#11a8cd"/>
-<rect x="670" y="412" width="36" height="36" fill="#e5e5e5"/>
-<rect x="390" y="452" width="36" height="36" fill="#666666"/>
-<rect x="430" y="452" width="36" height="36" fill="#f14c4c"/>
-<rect x="470" y="452" width="36" height="36" fill="#23d18b"/>
-<rect x="510" y="452" width="36" height="36" fill="#f5f543"/>
-<rect x="550" y="452" width="36" height="36" fill="#3b8eea"/>
-<rect x="590" y="452" width="36" height="36" fill="#d670d6"/>
-<rect x="630" y="452" width="36" height="36" fill="#29b8db"/>
+<rect x="390" y="412" width="36" height="36" fill="#586069"/>
+<rect x="430" y="412" width="36" height="36" fill="#ff5555"/>
+<rect x="470" y="412" width="36" height="36" fill="#2ee66d"/>
+<rect x="510" y="412" width="36" height="36" fill="#ffe14d"/>
+<rect x="550" y="412" width="36" height="36" fill="#4d9dff"/>
+<rect x="590" y="412" width="36" height="36" fill="#d24dff"/>
+<rect x="630" y="412" width="36" height="36" fill="#3ee0e6"/>
+<rect x="670" y="412" width="36" height="36" fill="#e8ecf1"/>
+<rect x="390" y="452" width="36" height="36" fill="#7d8590"/>
+<rect x="430" y="452" width="36" height="36" fill="#ff8a80"/>
+<rect x="470" y="452" width="36" height="36" fill="#69f0ae"/>
+<rect x="510" y="452" width="36" height="36" fill="#fff59d"/>
+<rect x="550" y="452" width="36" height="36" fill="#82b1ff"/>
+<rect x="590" y="452" width="36" height="36" fill="#ea80fc"/>
+<rect x="630" y="452" width="36" height="36" fill="#84ffff"/>
 <rect x="670" y="452" width="36" height="36" fill="#ffffff"/>
 </svg>
