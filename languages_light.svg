@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="420px" height="150px" font-size="11px">
+<rect width="420px" height="150px" rx="15" fill="#f6f8fa"/>
+<text x="22" y="20" font-size="13" fill="#24292f">Languages</text>
+<path d="M78 84L78.0000 29.0000A55 55 0 0 1 125.6626 111.4460Z" fill="#3178c6" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L125.6626 111.4460A55 55 0 0 1 73.2677 138.7960Z" fill="#e34c26" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L73.2677 138.7960A55 55 0 0 1 30.0734 110.9822Z" fill="#4f5d95" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L30.0734 110.9822A55 55 0 0 1 23.0978 80.7219Z" fill="#f7523f" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L23.0978 80.7219A55 55 0 0 1 31.8652 54.0570Z" fill="#3572a5" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L31.8652 54.0570A55 55 0 0 1 45.2496 39.8139Z" fill="#663399" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L45.2496 39.8139A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#f6f8fa" stroke-width="1"/>
+<rect x="155" y="38" width="8" height="8" rx="2" fill="#3178c6"/>
+<text x="171" y="46" fill="#24292f">TypeScript</text>
+<text x="410" y="46" text-anchor="end" fill="#8494ab">33%</text>
+<rect x="155" y="54" width="8" height="8" rx="2" fill="#e34c26"/>
+<text x="171" y="62" fill="#24292f">HTML</text>
+<text x="410" y="62" text-anchor="end" fill="#8494ab">18%</text>
+<rect x="155" y="70" width="8" height="8" rx="2" fill="#4f5d95"/>
+<text x="171" y="78" fill="#24292f">PHP</text>
+<text x="410" y="78" text-anchor="end" fill="#8494ab">15%</text>
+<rect x="155" y="86" width="8" height="8" rx="2" fill="#f7523f"/>
+<text x="171" y="94" fill="#24292f">Blade</text>
+<text x="410" y="94" text-anchor="end" fill="#8494ab">9%</text>
+<rect x="155" y="102" width="8" height="8" rx="2" fill="#3572a5"/>
+<text x="171" y="110" fill="#24292f">Python</text>
+<text x="410" y="110" text-anchor="end" fill="#8494ab">8%</text>
+<rect x="155" y="118" width="8" height="8" rx="2" fill="#663399"/>
+<text x="171" y="126" fill="#24292f">CSS</text>
+<text x="410" y="126" text-anchor="end" fill="#8494ab">6%</text>
+<rect x="155" y="134" width="8" height="8" rx="2" fill="#8b949e"/>
+<text x="171" y="142" fill="#24292f">Other</text>
+<text x="410" y="142" text-anchor="end" fill="#8494ab">10%</text>
+</svg>

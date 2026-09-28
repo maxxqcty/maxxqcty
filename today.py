@@ -4,6 +4,7 @@ import os
 from lxml import etree
 import time
 import hashlib
+import math
 
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
@@ -11,7 +12,7 @@ import hashlib
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
 USER_NAME = 'maxxqcty'  # your GitHub username
-QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
+QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0, 'language_fetch': 0}
 
 
 CACHE_LINE_PATTERN = re.compile(r'^[0-9a-f]{64}\s+\d+\s+\d+\s+\d+\s+\d+\s*$')
@@ -380,6 +381,106 @@ def find_and_replace(root, element_id, new_text, required=True):
     element.text = new_text
 
 
+LANG_THEMES = {
+    'dark': {'bg': '#161b22', 'title': '#e6edf3', 'label': '#e6edf3', 'pct': '#8b98ac'},
+    'light': {'bg': '#f6f8fa', 'title': '#24292f', 'label': '#24292f', 'pct': '#8494ab'},
+}
+LANG_OTHER_COLOR = '#8b949e'
+
+
+def language_fetch():
+    """
+    Returns [(name, bytes, linguist color)] for the account's public, non-fork
+    repositories, aggregated by bytes and sorted largest first.
+    """
+    query_count('language_fetch')
+    query = '''
+    query ($login: String!) {
+        user(login: $login) {
+            repositories(first: 100, ownerAffiliations: [OWNER]) {
+                pageInfo { hasNextPage }
+                nodes {
+                    isFork
+                    isPrivate
+                    languages(first: 100, orderBy: {field: SIZE, direction: DESC}) {
+                        edges { size node { name color } }
+                    }
+                }
+            }
+        }
+    }'''
+    variables = {'login': USER_NAME}
+    request = simple_request(language_fetch.__name__, query, variables)
+    repository_page = request.json()['data']['user']['repositories']
+    if repository_page['pageInfo']['hasNextPage']:
+        raise Exception('language_fetch: more than 100 repositories, language totals would be incomplete')
+    totals, colors = {}, {}
+    for repository in repository_page['nodes']:
+        if repository['isFork'] or repository['isPrivate']:
+            continue
+        for edge in repository['languages']['edges']:
+            name = edge['node']['name']
+            totals[name] = totals.get(name, 0) + edge['size']
+            if edge['node'].get('color') and name not in colors:
+                colors[name] = edge['node']['color']
+    if not totals:
+        raise ValueError('language_fetch found no languages in the public non-fork repositories')
+    ranked = sorted(totals, key=lambda name: -totals[name])
+    return [(name, totals[name], colors.get(name, LANG_OTHER_COLOR)) for name in ranked]
+
+
+def language_render(entries, theme, top=6):
+    """
+    Renders the compact language pie card as an SVG string: the `top` largest
+    languages plus an aggregate Other slice, a legend, and a title.
+    Pure and deterministic for identical input, so unchanged language data
+    produces an unchanged file and no bot commit.
+    """
+    palette = LANG_THEMES[theme]
+    total = sum(size for _, size, _ in entries)
+    if total <= 0:
+        raise ValueError('language_render: total byte count must be positive')
+    slices = list(entries[:top])
+    if len(entries) > top:
+        slices.append(('Other', sum(size for _, size, _ in entries[top:]), LANG_OTHER_COLOR))
+    width, height = 420, 150
+    center_x, center_y, radius = 78, 84, 55
+    lines = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="{width}px" height="{height}px" font-size="11px">',
+        f'<rect width="{width}px" height="{height}px" rx="15" fill="{palette["bg"]}"/>',
+        f'<text x="22" y="20" font-size="13" fill="{palette["title"]}">Languages</text>',
+    ]
+
+    def slice_point(degrees):  # 0 degrees points at 12 o'clock, increasing clockwise
+        radians = math.radians(degrees - 90)
+        return center_x + radius * math.cos(radians), center_y + radius * math.sin(radians)
+
+    start = 0.0
+    for _, size, color in slices:
+        sweep = 360 * size / total
+        if sweep >= 359.99:
+            lines.append(f'<circle cx="{center_x}" cy="{center_y}" r="{radius}" fill="{color}"/>')
+        else:
+            x_start, y_start = slice_point(start)
+            x_end, y_end = slice_point(start + sweep)
+            large_arc = int(sweep > 180)
+            lines.append(
+                f'<path d="M{center_x} {center_y}L{x_start:.4f} {y_start:.4f}'
+                f'A{radius} {radius} 0 {large_arc} 1 {x_end:.4f} {y_end:.4f}Z"'
+                f' fill="{color}" stroke="{palette["bg"]}" stroke-width="1"/>'
+            )
+        start += sweep
+
+    for index, (name, size, color) in enumerate(slices):
+        baseline = 46 + 16 * index
+        lines.append(f'<rect x="155" y="{baseline - 8}" width="8" height="8" rx="2" fill="{color}"/>')
+        lines.append(f'<text x="171" y="{baseline}" fill="{palette["label"]}">{name}</text>')
+        lines.append(f'<text x="410" y="{baseline}" text-anchor="end" fill="{palette["pct"]}">{round(100 * size / total)}%</text>')
+
+    lines.append('</svg>')
+    return '\n'.join(lines) + '\n'
+
+
 def commit_counter(filename=None):
     """
     Counts up my total commits, using the cache file created by cache_builder.
@@ -461,7 +562,7 @@ def formatter(query_type, difference, funct_return=False, whitespace=0):
 
 def main():
     """
-    Fetches every stat from the GitHub GraphQL API and writes both SVG variants.
+    Fetches every stat from the GitHub GraphQL API and writes the stats and language-card SVG variants.
     Andrew Grant (Andrew6rant) wrote the original, 2022-2025.
     """
     global OWNER_ID  # recursive_loc reads OWNER_ID as a module global
@@ -470,6 +571,7 @@ def main():
     user_data, user_time = perf_counter(user_getter, USER_NAME)
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
+    lang_data = language_fetch()
     total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
     commit_data, commit_time = perf_counter(commit_counter)
@@ -482,6 +584,10 @@ def main():
 
     svg_overwrite('dark_mode.svg', commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
     svg_overwrite('light_mode.svg', commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    with open('languages_dark.svg', 'w', encoding='utf-8', newline='') as pie_file:
+        pie_file.write(language_render(lang_data, 'dark'))
+    with open('languages_light.svg', 'w', encoding='utf-8', newline='') as pie_file:
+        pie_file.write(language_render(lang_data, 'light'))
 
     # move cursor to override 'Calculation times:' with 'Total function time:' and the total function time, then move cursor back
     print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
