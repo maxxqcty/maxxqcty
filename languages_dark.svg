@@ -8,6 +8,7 @@
 <path d="M78 84L23.0978 80.7219A55 55 0 0 1 31.8652 54.0570Z" fill="#3572a5" stroke="#161b22" stroke-width="1"/>
 <path d="M78 84L31.8652 54.0570A55 55 0 0 1 45.2496 39.8139Z" fill="#663399" stroke="#161b22" stroke-width="1"/>
 <path d="M78 84L45.2496 39.8139A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#161b22" stroke-width="1"/>
+<circle cx="78" cy="84" r="30" fill="#161b22"/>
 <rect x="155" y="38" width="8" height="8" rx="2" fill="#3178c6"/>
 <text x="171" y="46" fill="#e6edf3">TypeScript</text>
 <text x="410" y="46" text-anchor="end" fill="#8b98ac">33%</text>

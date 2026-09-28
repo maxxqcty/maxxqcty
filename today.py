@@ -471,6 +471,9 @@ def language_render(entries, theme, top=6):
             )
         start += sweep
 
+    # donut hole: bg-colored disc over the wedge centers (outer radius 55, hole radius 30)
+    lines.append(f'<circle cx="{center_x}" cy="{center_y}" r="30" fill="{palette["bg"]}"/>')
+
     for index, (name, size, color) in enumerate(slices):
         baseline = 46 + 16 * index
         lines.append(f'<rect x="155" y="{baseline - 8}" width="8" height="8" rx="2" fill="{color}"/>')
