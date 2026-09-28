@@ -35,7 +35,7 @@
 </p>
 
 
-## 🛠️ ** TECH STACK
+## 🛠️ Tech Stack
 
 
 
