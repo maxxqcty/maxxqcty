@@ -32,7 +32,7 @@ def load_config(path=CONFIG_PATH):
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
-USER_NAME = os.environ['USER_NAME'] # 'Andrew6rant'
+USER_NAME = None # set by main() from config.json
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
 
@@ -359,25 +359,6 @@ def flush_cache(edges, filename):
             f.write(old_by_hash.get(repo_hash, repo_hash + ' 0 0 0 0\n'))
 
 
-def add_archive():
-    """
-    Several repositories I have contributed to have since been deleted.
-    This function adds them using their last known data
-    """
-    with open('cache/repository_archive.txt', 'r') as f:
-        data = f.readlines()
-    old_data = data
-    data = data[7:len(data)-3] # remove the comment block    
-    added_loc, deleted_loc, added_commits = 0, 0, 0
-    contributed_repos = len(data)
-    for line in data:
-        repo_hash, total_commits, my_commits, *loc = line.split()
-        added_loc += int(loc[0])
-        deleted_loc += int(loc[1])
-        if (my_commits.isdigit()): added_commits += int(my_commits)
-    added_commits += int(old_data[-1].split()[4][:-1])
-    return [added_loc, deleted_loc, added_loc - deleted_loc, added_commits, contributed_repos]
-
 def force_close_file(data, cache_comment):
     """
     Forces the file to close, preserving whatever data was written to it
@@ -430,16 +411,22 @@ def justify_format(root, element_id, new_text, length=0):
         dot_string = dot_map[just_len]
     else:
         dot_string = ' ' + ('.' * just_len) + ' '
-    find_and_replace(root, f"{element_id}_dots", dot_string)
+    find_and_replace(root, f"{element_id}_dots", dot_string, required=False)
 
 
-def find_and_replace(root, element_id, new_text):
+def find_and_replace(root, element_id, new_text, required=True):
     """
-    Finds the element in the SVG file and replaces its text with a new value
+    Finds the element in the SVG file and replaces its text with a new value.
+    Raises KeyError if the id is missing and required is True (a renamed or
+    removed element should fail the build, not silently render stale stats);
+    optional ids (the decorative dot fillers) are skipped.
     """
     element = root.find(f".//*[@id='{element_id}']")
-    if element is not None:
-        element.text = new_text
+    if element is None:
+        if required:
+            raise KeyError(f'no element with id={element_id!r} in the SVG')
+        return
+    element.text = new_text
 
 
 def commit_counter(filename=None):
@@ -521,33 +508,29 @@ def formatter(query_type, difference, funct_return=False, whitespace=0):
     return funct_return
 
 
-if __name__ == '__main__':
+def main(config_path=CONFIG_PATH):
     """
-    Andrew Grant (Andrew6rant), 2022-2025
+    Loads personal settings from config.json, fetches every stat from the
+    GitHub GraphQL API and writes both SVG variants.
+    Andrew Grant (Andrew6rant) wrote the original, 2022-2025.
     """
+    global USER_NAME
+    config = load_config(config_path)
+    USER_NAME = config['username']
     print('Calculation times:')
-    # define global variable for owner ID and calculate user's creation date
-    # e.g {'id': 'MDQ6VXNlcjU3MzMxMTM0'} and 2019-11-03T21:15:07Z for username 'Andrew6rant'
+    # fetch the account's node id (used to only count commits authored by me) and creation date
     user_data, user_time = perf_counter(user_getter, USER_NAME)
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
-    age_data, age_time = perf_counter(daily_readme, datetime.datetime(2002, 7, 5))
+    age_data, age_time = perf_counter(daily_readme, config['birthday'])
     formatter('age calculation', age_time)
-    total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
+    total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
-    commit_data, commit_time = perf_counter(commit_counter, 7)
+    commit_data, commit_time = perf_counter(commit_counter)
     star_data, star_time = perf_counter(graph_repos_stars, 'stars', ['OWNER'])
     repo_data, repo_time = perf_counter(graph_repos_stars, 'repos', ['OWNER'])
     contrib_data, contrib_time = perf_counter(graph_repos_stars, 'repos', ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
     follower_data, follower_time = perf_counter(follower_getter, USER_NAME)
-
-    # several repositories that I've contributed to have since been deleted.
-    if OWNER_ID == {'id': 'MDQ6VXNlcjU3MzMxMTM0'}: # only calculate for user Andrew6rant
-        archived_data = add_archive()
-        for index in range(len(total_loc)-1):
-            total_loc[index] += archived_data[index]
-        contrib_data += archived_data[-1]
-        commit_data += int(archived_data[-2])
 
     for index in range(len(total_loc)-1): total_loc[index] = '{:,}'.format(total_loc[index]) # format added, deleted, and total LOC
 
@@ -561,3 +544,7 @@ if __name__ == '__main__':
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
     for funct_name, count in QUERY_COUNT.items(): print('{:<28}'.format('   ' + funct_name + ':'), '{:>6}'.format(count))
+
+
+if __name__ == '__main__':
+    main()
