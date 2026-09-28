@@ -16,8 +16,6 @@ size-adjust: 109%;
 text, tspan {white-space: pre;}
 </style>
 <rect width="985px" height="530px" fill="#f6f8fa" rx="15"/>
-<rect x="1" y="1" width="983" height="528" rx="14" fill="none" stroke="#0969da" stroke-width="2"/>
-<rect x="382" y="305" width="568" height="94" rx="10" fill="none" stroke="#0969da" stroke-width="2"/>
 <circle cx="22" cy="15" r="8" fill="#ff5f57" stroke="#00000033" stroke-width="1"/>
 <circle cx="44" cy="15" r="8" fill="#febc2e" stroke="#00000033" stroke-width="1"/>
 <circle cx="66" cy="15" r="8" fill="#28c840" stroke="#00000033" stroke-width="1"/>
@@ -66,6 +64,7 @@ text, tspan {white-space: pre;}
 <tspan x="390" y="247" class="cc">. </tspan>
 <tspan x="390" y="267" class="cc">. </tspan><tspan class="key">Languages</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">English, Filipino</tspan>
 <tspan x="390" y="287" class="cc">. </tspan><tspan class="key">Hobbies</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">Linux, Homelab, Vibe Coding</tspan>
+<tspan x="390" y="307" class="cc">. </tspan>
 <tspan x="390" y="327">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
 <tspan x="390" y="347" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan><tspan class="value" id="repo_data">27</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">28</tspan>} | <tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ............. </tspan><tspan class="value" id="star_data">3</tspan>
 <tspan x="390" y="367" class="cc">. </tspan><tspan class="key">Commmits</tspan>:<tspan class="cc" id="commit_data_dots"> ................... </tspan><tspan class="value" id="commit_data">142</tspan> | <tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ......... </tspan><tspan class="value" id="follower_data">3</tspan>

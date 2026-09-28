@@ -15,7 +15,7 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=maxxqcty&theme=dark&background=161b22&border=30363d">
+    <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=maxxqcty&theme=dark&background=161b22&border=ffffff">
     <img src="https://streak-stats.demolab.com?user=maxxqcty&theme=light&background=f6f8fa&border=d0d7de" alt="GitHub streak" />
   </picture>
 </p>
