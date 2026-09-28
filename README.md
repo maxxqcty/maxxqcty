@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Inconsolata&weight=500&size=29&duration=4000&pause=1000&color=F7F7F7&vCenter=true&width=460&height=200&lines=Hi%2C+my+name+is+maxxqcty....;Welcome+to+my+profile!+%3A%29)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Inconsolata&weight=500&size=29&duration=4000&pause=1000&color=F7F7F7&center=true&vCenter=true&width=460&height=100&lines=Hi%2C+my+name+is+maxxqcty....;Welcome+to+my+profile!+%3A%29)](https://git.io/typing-svg)
 
 <!-- <p align="center">
   <img src="https://komarev.com/ghpvc/?username=maxxqcty&style=for-the-badge" alt="Profile views" />
