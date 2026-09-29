@@ -1,6 +1,7 @@
 import json
 from datetime import date, timedelta
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -183,18 +184,6 @@ def test_fetch_lines_sends_the_documented_request():
     assert 'lines' in schema['properties']
 
 
-def test_fetch_lines_retries_once_after_a_server_error():
-    attempts = []
-
-    def post(url, **kwargs):
-        attempts.append(url)
-        return FakeResponse(503, 'busy')
-
-    with pytest.raises(Exception):
-        haiku.fetch_lines('SECRET', post=post)
-    assert len(attempts) == 2
-
-
 def test_generate_returns_api_result_without_falling_back():
     lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=_good_post())
     assert lines == GOOD
@@ -243,6 +232,57 @@ def test_fallback_cycles_through_every_entry():
     assert len(seen) == len(entries), 'rotation must reach every fallback haiku'
 
 
+def test_fetch_lines_retries_transient_failures_up_to_the_budget():
+    attempts = []
+
+    def post(url, **kwargs):
+        attempts.append(url)
+        return FakeResponse(503, '{"error": {"message": "high demand", "code": "service_unavailable"}}')
+
+    with pytest.raises(RuntimeError) as excinfo:
+        haiku.fetch_lines('SECRET', post=post)
+    assert len(attempts) == haiku.MAX_ATTEMPTS
+    assert 'high demand' in str(excinfo.value)
+
+
+def test_recovers_when_the_service_comes_back():
+    replies = [
+        FakeResponse(503, '{"error": {"message": "high demand"}}'),
+        FakeResponse(503, '{"error": {"message": "high demand"}}'),
+        FakeResponse(200, json.dumps({'lines': GOOD})),
+    ]
+
+    def post(url, **kwargs):
+        return replies.pop(0)
+
+    assert haiku.fetch_lines('SECRET', post=post) == GOOD
+    assert len(replies) == 0
+
+
+def test_gives_up_immediately_on_a_client_error():
+    attempts = []
+
+    def post(url, **kwargs):
+        attempts.append(url)
+        return FakeResponse(400, '{"error": {"message": "not a valid request"}}')
+
+    with pytest.raises(RuntimeError):
+        haiku.fetch_lines('SECRET', post=post)
+    assert len(attempts) == 1, 'a 4xx other than 429 will never succeed, do not burn the budget'
+
+
+def test_backs_off_exponentially_between_attempts(monkeypatch):
+    sleeps = []
+    monkeypatch.setattr(haiku, 'time', SimpleNamespace(sleep=sleeps.append))
+
+    def post(url, **kwargs):
+        return FakeResponse(503, 'busy')
+
+    with pytest.raises(RuntimeError):
+        haiku.fetch_lines('SECRET', post=post)
+    assert sleeps == [4, 8, 16]
+
+
 def test_fetch_lines_error_includes_status_and_body():
     def post(url, **kwargs):
         return FakeResponse(400, '{"error": {"message": "schema has unsupported keyword"}}')
@@ -261,7 +301,7 @@ def test_generate_logs_the_underlying_cause_not_just_a_summary(capsys):
     lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=post)
     err = capsys.readouterr().err
     assert used_fallback is True
-    assert 'after 2 attempts' in err
+    assert 'haiku request failed' in err
     assert 'API has not been enabled' in err
 
 

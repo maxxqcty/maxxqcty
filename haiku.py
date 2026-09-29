@@ -20,7 +20,12 @@ FALLBACK_FILE = 'haiku_fallback.txt'
 README_FILE = 'README.md'
 API_URL = 'https://generativelanguage.googleapis.com/v1beta/interactions'
 MODEL = 'gemini-3.8-flash'
-MAX_ATTEMPTS = 2
+MAX_ATTEMPTS = 4
+BACKOFF_BASE = 4
+READ_TIMEOUT = 45
+# Google returns 503 + "usually temporary" when gemini-flash is under load, and
+# 429 when the free tier is throttled; every other 4xx will never succeed.
+RETRYABLE_STATUSES = frozenset({429, 500, 502, 503, 504})
 
 PROMPT = (
     'Write one original English haiku.\n'
@@ -170,13 +175,21 @@ def fallback_lines(day, path=FALLBACK_FILE):
     return entries[(day_of_year - 1) % len(entries)]
 
 
-def fetch_lines(api_key, post=None, retries=MAX_ATTEMPTS - 1):
+def fetch_lines(api_key, post=None, attempts=MAX_ATTEMPTS):
     """Asks Gemini for a haiku and returns validated lines; raises on failure.
 
-    Every boundary is logged and folded into the raised error -- HTTP status,
-    response body, validation message -- because this script runs unattended
-    and the workflow log is the only place its failure ever gets seen. The key
-    travels in a header and is never printed; only its length is.
+    Two things this has to get right, because it runs unattended and the
+    workflow log is the only place its failure ever gets seen:
+
+    Diagnostics -- HTTP status, response body and validation message are all
+    logged and folded into the raised error, so a failure names its boundary
+    instead of collapsing into "something went wrong". The key travels in a
+    header and is never printed; only its length is.
+
+    Patience -- a 503 from an overloaded model is temporary, so transient
+    failures get exponential backoff across ``attempts``; a 400 will never
+    become a 200, so client errors stop on the first one instead of burning
+    the budget.
     """
     if post is None:
         post = requests.post
@@ -196,21 +209,37 @@ def fetch_lines(api_key, post=None, retries=MAX_ATTEMPTS - 1):
         file=sys.stderr,
     )
     last_problem = 'no attempt completed'
-    for attempt in range(retries + 1):
+    for attempt in range(1, attempts + 1):
         body = None
+        retryable = True
         try:
-            response = post(API_URL, json=payload, headers=headers, timeout=30)
-            body = response.text
-            print(f'Gemini: attempt {attempt + 1} HTTP {response.status_code} | {body[:400]}',
-                  file=sys.stderr)
-            response.raise_for_status()
-            return validate(parse_lines(body))
+            response = post(API_URL, json=payload, headers=headers, timeout=READ_TIMEOUT)
         except Exception as error:
-            last_problem = f'{error!r} | body: {body[:400]}' if body else repr(error)
-            print(f'Gemini: attempt {attempt + 1} failed -> {last_problem}', file=sys.stderr)
-            if attempt < retries:
-                time.sleep(2 ** attempt)
-    raise RuntimeError(f'haiku request failed after {retries + 1} attempts: {last_problem}')
+            # A timeout or connection error never produced a status: always worth retrying.
+            last_problem = repr(error)
+            print(f'Gemini: attempt {attempt} failed -> {last_problem}', file=sys.stderr)
+        else:
+            body = response.text
+            print(f'Gemini: attempt {attempt} HTTP {response.status_code} | {body[:400]}',
+                  file=sys.stderr)
+            if response.status_code >= 400:
+                last_problem = f'HTTP {response.status_code} | body: {body[:400]}'
+                retryable = response.status_code in RETRYABLE_STATUSES
+            else:
+                try:
+                    return validate(parse_lines(body))
+                except Exception as error:
+                    # The call worked but the haiku did not; re-asking may do better.
+                    last_problem = f'{error!r} | body: {body[:400]}'
+                    print(f'Gemini: attempt {attempt} failed -> {last_problem}', file=sys.stderr)
+        if not retryable:
+            print(f'Gemini: attempt {attempt} is not retryable, stopping', file=sys.stderr)
+            break
+        if attempt < attempts:
+            delay = BACKOFF_BASE * 2 ** (attempt - 1)
+            print(f'Gemini: backing off {delay}s before attempt {attempt + 1}', file=sys.stderr)
+            time.sleep(delay)
+    raise RuntimeError(f'haiku request failed after {attempt} attempt(s): {last_problem}')
 
 
 def generate(day, api_key, post=None, fallback_path=FALLBACK_FILE):
