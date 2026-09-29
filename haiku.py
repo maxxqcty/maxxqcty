@@ -121,14 +121,15 @@ def parse_lines(body):
 
 
 def render_block(lines, day):
-    """Renders the blockquote that lives between the README markers.
+    """Renders the centred haiku that lives between the README markers.
 
-    Every line becomes its own quoted paragraph and is italicised. Plain
-    consecutive lines collapse into one run-on paragraph when rendered,
-    so the blank quoted line between them is load-bearing, not decoration.
+    Lines are joined with <br> rather than blank lines: without an explicit
+    break, consecutive lines collapse into a single run-on paragraph when
+    rendered. The blank line before the date is a paragraph break, so the
+    date sits apart from the poem rather than running into it.
     """
-    quoted = '\n>\n'.join(f'> *{line}*' for line in validate(lines))
-    return f'{quoted}\n>\n> <sub>{day}</sub>'
+    poem = '<br>'.join(f'*{line}*' for line in validate(lines))
+    return f'<div align="center">\n\n{poem}\n\n<sub>{day}</sub>\n\n</div>'
 
 
 def update_readme(text, block):

@@ -55,12 +55,20 @@ def test_validate_rejects_markup():
         haiku.validate(['<b>bold</b>', 'seven syllables', 'five here'])
 
 
-def test_render_block_gives_every_line_its_own_paragraph():
-    """Guards the run-on bug: plain consecutive lines collapse into one paragraph."""
+def test_render_block_breaks_every_line():
+    """Guards the run-on bug: consecutive lines with no <br> collapse into one paragraph."""
     block = haiku.render_block(GOOD, '2026-09-30')
     for line in GOOD:
-        assert f'> *{line}*' in block
-    assert '\n>\n'.join(f'> *{line}*' for line in GOOD) in block
+        assert f'*{line}*' in block
+    assert '*autumn twilight falls*<br>' in block
+    assert '*the old pond waits in silence*<br>' in block
+
+
+def test_render_block_centers_itself():
+    block = haiku.render_block(GOOD, '2026-09-30')
+    assert block.startswith('<div align="center">')
+    assert block.endswith('</div>')
+    assert not any(line.startswith('>') for line in block.splitlines()), 'no quote bar'
 
 
 def test_render_block_includes_the_date():
@@ -68,13 +76,18 @@ def test_render_block_includes_the_date():
 
 
 def test_render_block_puts_the_date_in_small_text():
-    assert '> <sub>2026-09-30</sub>' in haiku.render_block(GOOD, '2026-09-30')
-
-
-def test_render_block_adds_only_the_sub_tag():
     block = haiku.render_block(GOOD, '2026-09-30')
-    assert block.count('<') == 2
-    assert '<br' not in block
+    assert '<sub>2026-09-30</sub>' in block
+    assert '> <sub>' not in block
+
+
+def test_render_block_adds_no_stray_markup():
+    """After stripping the tags this renderer is allowed to emit, only plain text is left."""
+    block = haiku.render_block(GOOD, '2026-09-30')
+    for tag in ('<div align="center">', '</div>', '<br>', '<sub>', '</sub>'):
+        block = block.replace(tag, '')
+    assert '<' not in block
+    assert '>' not in block
 
 
 def test_update_readme_replaces_inner_content_and_keeps_markers():
@@ -83,7 +96,7 @@ def test_update_readme_replaces_inner_content_and_keeps_markers():
     assert out.count(haiku.MARKER_START) == 1
     assert out.count(haiku.MARKER_END) == 1
     assert 'old haiku' not in out
-    assert '> *autumn twilight falls*' in out
+    assert '*autumn twilight falls*<br>' in out
     assert out.startswith('before')
     assert out.rstrip().endswith('after')
 
