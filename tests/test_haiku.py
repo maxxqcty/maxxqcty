@@ -234,3 +234,13 @@ def test_shipped_readme_contains_the_haiku_markers():
     text = README_FILE.read_text(encoding='utf-8')
     assert haiku.MARKER_START in text
     assert haiku.MARKER_END in text
+
+
+def test_haiku_section_sits_above_the_badges():
+    text = README_FILE.read_text(encoding='utf-8')
+    assert text.index(haiku.MARKER_START) < text.index('dark_mode.svg')
+
+
+def test_daily_haiku_heading_is_gone():
+    text = README_FILE.read_text(encoding='utf-8')
+    assert 'Daily Haiku' not in text
