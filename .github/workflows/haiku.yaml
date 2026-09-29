@@ -1,0 +1,39 @@
+name: Daily haiku
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: daily-haiku
+  cancel-in-progress: false
+jobs:
+  haiku:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Write today's haiku
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python haiku.py
+      - name: Commit
+        run: |-
+          git add README.md
+          git diff --staged
+          git config user.email "maxxqcty@users.noreply.github.com"
+          git config user.name "maxxqcty"
+          git commit -m "Daily haiku $(date -u +%F)" || echo "No changes to commit"
+          git pull --rebase origin main
+          git push

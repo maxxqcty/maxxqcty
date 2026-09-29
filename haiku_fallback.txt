@@ -1,0 +1,163 @@
+# Bundled fallback haikus for haiku.py
+# One haiku per block, separated by blank lines, three lines each (5-7-5).
+# Lines starting with # are comments. Every entry must pass haiku.validate().
+
+Pale moon over pines
+silver light on still water
+a small frog jumps once
+
+Rain on the roof top
+each drop a tiny drumbeat
+spring is waking up
+
+Autumn leaves falling
+the old road remembers rain
+footprints fill with gold
+
+Winter morning light
+breath becomes a small white cloud
+the street sleeps in snow
+
+Quiet computer
+a cursor blinks in the dark
+code grows like a vine
+
+Lights across the field
+small lanterns above the grass
+summer holds its breath
+
+Ocean tide returns
+dragging shells along the shore
+the moon pulls the night
+
+Sip of hot tea now
+steam writes a word then is gone
+a slow morning starts
+
+Two crows on a wire
+counting cars beneath them pass
+grey afternoon sky
+
+Cherry blossoms drift
+down the alley and away
+spring does not look back
+
+Bells ring in the town
+the sound crosses open fields
+birds leave the wires
+
+Deep night, the laptop
+one more bug then off to sleep
+the fan hums softly
+
+Sunlight through the blinds
+stripes of gold across the floor
+dust dancing slowly
+
+Old cat by the door
+watching rain she cannot reach
+she dreams of warm stone
+
+Thunder far away
+the sky clears its throat again
+green smell of wet earth
+
+Train through the valley
+carrying them home at night
+windows glow like stars
+
+Paper on the desk
+blank page waiting for a word
+and the pen thinks first
+
+Snow covers the roofs
+chimneys breathe a thin gray line
+the town is dreaming
+
+Half moon like a nail
+hammering the dark to stay
+stars line up behind
+
+Cicadas sing loud
+heat bends the afternoon air
+no one moves at all
+
+River over stones
+the water keeps talking on
+none of us stop here
+
+Library quiet
+pages turning like small waves
+the sea under glass
+
+Bike light in the dark
+a moving star along the road
+and home is close now
+
+Fog swallows the hills
+the world grows small and quiet
+one lone black pine tree
+
+Late train, empty car
+my reflection rides along
+asleep by the glass
+
+Clouds over the peak
+the mountain wears a white scarf
+winter comes early
+
+Spiders in the grass
+thin silk strung between the green
+dew holds the morning
+
+Coffee going cold
+the meeting runs on and on
+the window turns gray
+
+Swallows leave the eaves
+the nest waits under the roof
+spring returns again
+
+Wind through the wires
+power lines hum a low note
+and the dark keeps time
+
+Puddle in the road
+the whole sky fits in one step
+clouds under my shoe
+
+Old radio on
+voices from a summer past
+dust in the speaker
+
+Ants cross the kitchen
+a tiny parade of black
+the crumbs lead them home
+
+Sleeping city lights
+the window keeps a square of night
+I close my own eyes
+
+Bamboo after rain
+every joint remembers how
+to bend and stand up
+
+Snowflake on my sleeve
+it fades out before I blink
+winter signs in ink
+
+Bus stop in the rain
+everyone shares one small roof
+strangers stand closer
+
+Mango tree at noon
+fruit falls and the grass shakes once
+bees go back to sleep
+
+Lamps along the ward
+machines breathe in even time
+morning waits outside
+
+Bicycle bell rings
+the sound skips across the lane
+geese lift off slowly

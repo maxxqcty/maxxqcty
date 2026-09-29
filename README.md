@@ -35,6 +35,17 @@
 </p>
 
 
+## ✒️ Daily Haiku
+
+<!-- haiku:start -->
+> Old radio on
+> voices from a summer past
+> dust in the speaker
+>
+> 2026-09-29
+<!-- haiku:end -->
+
+
 ## 🛠️ Tech Stack
 
 
