@@ -243,6 +243,53 @@ def test_fallback_cycles_through_every_entry():
     assert len(seen) == len(entries), 'rotation must reach every fallback haiku'
 
 
+def test_fetch_lines_error_includes_status_and_body():
+    def post(url, **kwargs):
+        return FakeResponse(400, '{"error": {"message": "schema has unsupported keyword"}}')
+
+    with pytest.raises(RuntimeError) as excinfo:
+        haiku.fetch_lines('SECRET', post=post)
+    text = str(excinfo.value)
+    assert '400' in text
+    assert 'schema has unsupported keyword' in text
+
+
+def test_generate_logs_the_underlying_cause_not_just_a_summary(capsys):
+    def post(url, **kwargs):
+        return FakeResponse(403, '{"error": {"message": "API has not been enabled"}}')
+
+    lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=post)
+    err = capsys.readouterr().err
+    assert used_fallback is True
+    assert 'after 2 attempts' in err
+    assert 'API has not been enabled' in err
+
+
+def test_validate_rejection_is_reported_with_the_model_output(capsys):
+    def post(url, **kwargs):
+        payload = {'steps': [{'content': [{'text': json.dumps({'lines': ['only one line']})}]}]}
+        return FakeResponse(200, json.dumps(payload))
+
+    lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=post)
+    err = capsys.readouterr().err
+    assert used_fallback is True
+    assert 'exactly 3 lines' in err
+
+
+def test_diagnostics_never_print_the_api_key(capsys):
+    key = 'AIzaSyDUMMY-SECRET-VALUE-12345'
+
+    def post(url, **kwargs):
+        return FakeResponse(400, 'rejected')
+
+    with pytest.raises(RuntimeError):
+        haiku.fetch_lines(key, post=post)
+    haiku.generate('2026-09-30', key, post=post)
+    captured = capsys.readouterr()
+    assert key not in captured.err
+    assert key not in captured.out
+
+
 def test_shipped_readme_contains_the_haiku_markers():
     text = README_FILE.read_text(encoding='utf-8')
     assert haiku.MARKER_START in text

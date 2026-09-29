@@ -171,7 +171,13 @@ def fallback_lines(day, path=FALLBACK_FILE):
 
 
 def fetch_lines(api_key, post=None, retries=MAX_ATTEMPTS - 1):
-    """Asks Gemini for a haiku and returns validated lines; raises on failure."""
+    """Asks Gemini for a haiku and returns validated lines; raises on failure.
+
+    Every boundary is logged and folded into the raised error -- HTTP status,
+    response body, validation message -- because this script runs unattended
+    and the workflow log is the only place its failure ever gets seen. The key
+    travels in a header and is never printed; only its length is.
+    """
     if post is None:
         post = requests.post
     payload = {
@@ -184,17 +190,27 @@ def fetch_lines(api_key, post=None, retries=MAX_ATTEMPTS - 1):
         },
     }
     headers = {'x-goog-api-key': api_key, 'Content-Type': 'application/json'}
-    last_error = None
+    print(
+        f'Gemini: key present ({len(api_key)} chars) -> POST {API_URL} '
+        f'model={MODEL} bytes={len(json.dumps(payload))}',
+        file=sys.stderr,
+    )
+    last_problem = 'no attempt completed'
     for attempt in range(retries + 1):
+        body = None
         try:
             response = post(API_URL, json=payload, headers=headers, timeout=30)
+            body = response.text
+            print(f'Gemini: attempt {attempt + 1} HTTP {response.status_code} | {body[:400]}',
+                  file=sys.stderr)
             response.raise_for_status()
-            return validate(parse_lines(response.text))
+            return validate(parse_lines(body))
         except Exception as error:
-            last_error = error
+            last_problem = f'{error!r} | body: {body[:400]}' if body else repr(error)
+            print(f'Gemini: attempt {attempt + 1} failed -> {last_problem}', file=sys.stderr)
             if attempt < retries:
                 time.sleep(2 ** attempt)
-    raise RuntimeError(f'haiku request failed after {retries + 1} attempts') from last_error
+    raise RuntimeError(f'haiku request failed after {retries + 1} attempts: {last_problem}')
 
 
 def generate(day, api_key, post=None, fallback_path=FALLBACK_FILE):
