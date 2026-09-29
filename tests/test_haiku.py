@@ -55,18 +55,26 @@ def test_validate_rejects_markup():
         haiku.validate(['<b>bold</b>', 'seven syllables', 'five here'])
 
 
-def test_render_block_quotes_every_line():
+def test_render_block_gives_every_line_its_own_paragraph():
+    """Guards the run-on bug: plain consecutive lines collapse into one paragraph."""
     block = haiku.render_block(GOOD, '2026-09-30')
     for line in GOOD:
-        assert f'> {line}' in block
+        assert f'> *{line}*' in block
+    assert '\n>\n'.join(f'> *{line}*' for line in GOOD) in block
 
 
 def test_render_block_includes_the_date():
     assert '2026-09-30' in haiku.render_block(GOOD, '2026-09-30')
 
 
-def test_render_block_adds_no_html_of_its_own():
-    assert '<' not in haiku.render_block(GOOD, '2026-09-30')
+def test_render_block_puts_the_date_in_small_text():
+    assert '> <sub>2026-09-30</sub>' in haiku.render_block(GOOD, '2026-09-30')
+
+
+def test_render_block_adds_only_the_sub_tag():
+    block = haiku.render_block(GOOD, '2026-09-30')
+    assert block.count('<') == 2
+    assert '<br' not in block
 
 
 def test_update_readme_replaces_inner_content_and_keeps_markers():
@@ -75,7 +83,7 @@ def test_update_readme_replaces_inner_content_and_keeps_markers():
     assert out.count(haiku.MARKER_START) == 1
     assert out.count(haiku.MARKER_END) == 1
     assert 'old haiku' not in out
-    assert '> autumn twilight falls' in out
+    assert '> *autumn twilight falls*' in out
     assert out.startswith('before')
     assert out.rstrip().endswith('after')
 

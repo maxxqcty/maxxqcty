@@ -38,11 +38,13 @@
 ## ✒️ Daily Haiku
 
 <!-- haiku:start -->
-> Old radio on
-> voices from a summer past
-> dust in the speaker
+> *Old radio on*
 >
-> 2026-09-29
+> *voices from a summer past*
+>
+> *dust in the speaker*
+>
+> <sub>2026-09-29</sub>
 <!-- haiku:end -->
 
 

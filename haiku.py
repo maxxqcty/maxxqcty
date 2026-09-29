@@ -121,9 +121,14 @@ def parse_lines(body):
 
 
 def render_block(lines, day):
-    """Renders the blockquote that lives between the README markers."""
-    quoted = '\n'.join(f'> {line}' for line in validate(lines))
-    return f'{quoted}\n>\n> {day}'
+    """Renders the blockquote that lives between the README markers.
+
+    Every line becomes its own quoted paragraph and is italicised. Plain
+    consecutive lines collapse into one run-on paragraph when rendered,
+    so the blank quoted line between them is load-bearing, not decoration.
+    """
+    quoted = '\n>\n'.join(f'> *{line}*' for line in validate(lines))
+    return f'{quoted}\n>\n> <sub>{day}</sub>'
 
 
 def update_readme(text, block):
