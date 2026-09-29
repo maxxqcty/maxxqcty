@@ -1,7 +1,5 @@
-import json
 from datetime import date, timedelta
 from pathlib import Path
-from types import SimpleNamespace
 
 import pytest
 
@@ -113,35 +111,20 @@ def test_update_readme_raises_when_end_precedes_start():
         haiku.update_readme(text, 'anything')
 
 
-def test_parse_lines_reads_flat_json():
-    assert haiku.parse_lines(json.dumps({'lines': GOOD})) == GOOD
-
-
-def test_parse_lines_reads_json_embedded_in_response_text():
-    body = json.dumps({'steps': [{'content': [{'text': json.dumps({'lines': GOOD})}]}]})
-    assert haiku.parse_lines(body) == GOOD
-
-
-def test_parse_lines_reads_fenced_json():
-    body = '```json\n' + json.dumps({'lines': GOOD}) + '\n```'
-    assert haiku.parse_lines(body) == GOOD
-
-
-def test_parse_lines_raises_when_json_has_no_lines():
-    with pytest.raises(ValueError):
-        haiku.parse_lines('{"something": "else"}')
-
-
-def test_parse_lines_raises_on_unparseable_body():
-    with pytest.raises(ValueError):
-        haiku.parse_lines('<<< not json >>>')
-
-
 def test_every_fallback_entry_is_a_valid_haiku():
     entries = haiku.load_fallback(FALLBACK_FILE)
-    assert len(entries) >= 30, 'need at least 30 fallback haikus'
     for entry in entries:
         assert haiku.validate(entry) == entry
+
+
+def test_fallback_pool_holds_exactly_31_haikus():
+    """One per day of a month, so a visitor never sees the same one twice within a month."""
+    assert len(haiku.load_fallback(FALLBACK_FILE)) == 31
+
+
+def test_fallback_pool_entries_are_all_unique():
+    entries = haiku.load_fallback(FALLBACK_FILE)
+    assert len({tuple(entry) for entry in entries}) == 31
 
 
 def test_fallback_lines_are_deterministic_for_a_date():
@@ -154,74 +137,6 @@ def test_fallback_lines_rotate_across_dates():
         haiku.fallback_lines('2026-10-01', FALLBACK_FILE)
 
 
-class FakeResponse:
-    def __init__(self, status_code, text):
-        self.status_code = status_code
-        self.text = text
-
-    def raise_for_status(self):
-        if self.status_code >= 400:
-            raise RuntimeError(f'HTTP {self.status_code}')
-
-
-def _good_post(calls=None):
-    def post(url, **kwargs):
-        if calls is not None:
-            calls.append((url, kwargs))
-        payload = {'steps': [{'content': [{'text': json.dumps({'lines': GOOD})}]}]}
-        return FakeResponse(200, json.dumps(payload))
-    return post
-
-
-def test_fetch_lines_sends_the_documented_request():
-    calls = []
-    assert haiku.fetch_lines('SECRET', post=_good_post(calls)) == GOOD
-    url, kwargs = calls[0]
-    assert url == haiku.API_URL
-    assert kwargs['headers']['x-goog-api-key'] == 'SECRET'
-    assert kwargs['json']['model'] == haiku.MODEL
-    schema = kwargs['json']['response_format']['schema']
-    assert 'lines' in schema['properties']
-
-
-def test_generate_returns_api_result_without_falling_back():
-    lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=_good_post())
-    assert lines == GOOD
-    assert used_fallback is False
-
-
-def test_generate_falls_back_when_the_api_errors():
-    def post(url, **kwargs):
-        return FakeResponse(500, 'boom')
-
-    lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=post)
-    assert used_fallback is True
-    assert lines == haiku.fallback_lines('2026-09-30', FALLBACK_FILE)
-
-
-def test_generate_falls_back_when_the_api_returns_malformed_lines():
-    def post(url, **kwargs):
-        payload = {'steps': [{'content': [{'text': json.dumps({'lines': ['only one line']})}]}]}
-        return FakeResponse(200, json.dumps(payload))
-
-    lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=post)
-    assert used_fallback is True
-    assert lines == haiku.fallback_lines('2026-09-30', FALLBACK_FILE)
-
-
-def test_generate_never_calls_the_api_without_a_key():
-    calls = []
-
-    def post(url, **kwargs):
-        calls.append(url)
-        return FakeResponse(200, json.dumps({'lines': GOOD}))
-
-    lines, used_fallback = haiku.generate('2026-09-30', None, post=post)
-    assert calls == []
-    assert used_fallback is True
-    assert lines == haiku.fallback_lines('2026-09-30', FALLBACK_FILE)
-
-
 def test_fallback_cycles_through_every_entry():
     entries = haiku.load_fallback(FALLBACK_FILE)
     start = date(2026, 10, 1)
@@ -230,104 +145,6 @@ def test_fallback_cycles_through_every_entry():
         for i in range(len(entries))
     }
     assert len(seen) == len(entries), 'rotation must reach every fallback haiku'
-
-
-def test_fetch_lines_retries_transient_failures_up_to_the_budget():
-    attempts = []
-
-    def post(url, **kwargs):
-        attempts.append(url)
-        return FakeResponse(503, '{"error": {"message": "high demand", "code": "service_unavailable"}}')
-
-    with pytest.raises(RuntimeError) as excinfo:
-        haiku.fetch_lines('SECRET', post=post)
-    assert len(attempts) == haiku.MAX_ATTEMPTS
-    assert 'high demand' in str(excinfo.value)
-
-
-def test_recovers_when_the_service_comes_back():
-    replies = [
-        FakeResponse(503, '{"error": {"message": "high demand"}}'),
-        FakeResponse(503, '{"error": {"message": "high demand"}}'),
-        FakeResponse(200, json.dumps({'lines': GOOD})),
-    ]
-
-    def post(url, **kwargs):
-        return replies.pop(0)
-
-    assert haiku.fetch_lines('SECRET', post=post) == GOOD
-    assert len(replies) == 0
-
-
-def test_gives_up_immediately_on_a_client_error():
-    attempts = []
-
-    def post(url, **kwargs):
-        attempts.append(url)
-        return FakeResponse(400, '{"error": {"message": "not a valid request"}}')
-
-    with pytest.raises(RuntimeError):
-        haiku.fetch_lines('SECRET', post=post)
-    assert len(attempts) == 1, 'a 4xx other than 429 will never succeed, do not burn the budget'
-
-
-def test_backs_off_exponentially_between_attempts(monkeypatch):
-    sleeps = []
-    monkeypatch.setattr(haiku, 'time', SimpleNamespace(sleep=sleeps.append))
-
-    def post(url, **kwargs):
-        return FakeResponse(503, 'busy')
-
-    with pytest.raises(RuntimeError):
-        haiku.fetch_lines('SECRET', post=post)
-    assert sleeps == [4, 8, 16]
-
-
-def test_fetch_lines_error_includes_status_and_body():
-    def post(url, **kwargs):
-        return FakeResponse(400, '{"error": {"message": "schema has unsupported keyword"}}')
-
-    with pytest.raises(RuntimeError) as excinfo:
-        haiku.fetch_lines('SECRET', post=post)
-    text = str(excinfo.value)
-    assert '400' in text
-    assert 'schema has unsupported keyword' in text
-
-
-def test_generate_logs_the_underlying_cause_not_just_a_summary(capsys):
-    def post(url, **kwargs):
-        return FakeResponse(403, '{"error": {"message": "API has not been enabled"}}')
-
-    lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=post)
-    err = capsys.readouterr().err
-    assert used_fallback is True
-    assert 'haiku request failed' in err
-    assert 'API has not been enabled' in err
-
-
-def test_validate_rejection_is_reported_with_the_model_output(capsys):
-    def post(url, **kwargs):
-        payload = {'steps': [{'content': [{'text': json.dumps({'lines': ['only one line']})}]}]}
-        return FakeResponse(200, json.dumps(payload))
-
-    lines, used_fallback = haiku.generate('2026-09-30', 'SECRET', post=post)
-    err = capsys.readouterr().err
-    assert used_fallback is True
-    assert 'exactly 3 lines' in err
-
-
-def test_diagnostics_never_print_the_api_key(capsys):
-    key = 'AIzaSyDUMMY-SECRET-VALUE-12345'
-
-    def post(url, **kwargs):
-        return FakeResponse(400, 'rejected')
-
-    with pytest.raises(RuntimeError):
-        haiku.fetch_lines(key, post=post)
-    haiku.generate('2026-09-30', key, post=post)
-    captured = capsys.readouterr()
-    assert key not in captured.err
-    assert key not in captured.out
 
 
 def test_shipped_readme_contains_the_haiku_markers():

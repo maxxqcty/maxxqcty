@@ -8,7 +8,7 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Old radio on*<br>*voices from a summer past*<br>*dust in the speaker*
+*Now the clock strikes one*<br>*and the long hall holds its breath*<br>*and then sleeps again*
 
 <sub>2026-09-29</sub>
 

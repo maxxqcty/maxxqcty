@@ -1,163 +1,128 @@
-# Bundled fallback haikus for haiku.py
+# Bundled haiku pool for haiku.py -- one per day of a month, 31 in all.
 # One haiku per block, separated by blank lines, three lines each (5-7-5).
 # Lines starting with # are comments. Every entry must pass haiku.validate().
+# Register: Shakespearean -- time, mortality, ambition, vanity, the stage.
 
-Pale moon over pines
-silver light on still water
-a small frog jumps once
+O fair Rose, thou art
+too brief a flower for me
+and summer must die
 
-Rain on the roof top
-each drop a tiny drumbeat
-spring is waking up
+Doth dust remember
+the dust that was a crowned king
+no tongue shall reply
 
-Autumn leaves falling
-the old road remembers rain
-footprints fill with gold
+We are but players
+who act our parts in shadow
+then fall the curtain
 
-Winter morning light
-breath becomes a small white cloud
-the street sleeps in snow
+The good year grows old
+and swallows build against eaves
+while summer still holds
 
-Quiet computer
-a cursor blinks in the dark
-code grows like a vine
+O look in the glass
+the face that looks is not thine
+but a mask of time
 
-Lights across the field
-small lanterns above the grass
-summer holds its breath
+Now white winter comes
+the black tree writes on the snow
+and no man shall read
 
-Ocean tide returns
-dragging shells along the shore
-the moon pulls the night
+Anon the long sleep
+no drum shall wake the still house
+not one may follow
 
-Sip of hot tea now
-steam writes a word then is gone
-a slow morning starts
+O crown, thou art cold
+and heavy with the dead kings
+who first did wear it
 
-Two crows on a wire
-counting cars beneath them pass
-grey afternoon sky
+The dead do not walk
+yet still I hear them at night
+calling out my name
 
-Cherry blossoms drift
-down the alley and away
-spring does not look back
+Beauty is a rose
+that knows the frost ere it falls
+and bows its fair head
 
-Bells ring in the town
-the sound crosses open fields
-birds leave the wires
+And dust shall be king
+when gold and marble are gone
+and the throne is clay
 
-Deep night, the laptop
-one more bug then off to sleep
-the fan hums softly
+How lone the night is
+where owls repeat to the stones
+the names of dead kings
 
-Sunlight through the blinds
-stripes of gold across the floor
-dust dancing slowly
+Spin the long dark thread
+no sword may cut what ye spin
+nor stay the bright loom
 
-Old cat by the door
-watching rain she cannot reach
-she dreams of warm stone
+A good name is wind
+it passes through the loud town
+and then is no more
 
-Thunder far away
-the sky clears its throat again
-green smell of wet earth
+Old Time hath no shore
+yet ev'ry wave returns sand
+and all vanishes
 
-Train through the valley
-carrying them home at night
-windows glow like stars
+The fire speaks low
+to those who sit with the dead
+in winter's dark rooms
 
-Paper on the desk
-blank page waiting for a word
-and the pen thinks first
+I know not my heart
+it beats beneath a false breast
+like some dark traitor
 
-Snow covers the roofs
-chimneys breathe a thin gray line
-the town is dreaming
+And we are small ships
+on seas that no man has mapped
+and then the night comes
 
-Half moon like a nail
-hammering the dark to stay
-stars line up behind
+Water keeps no word
+it gives back the voice you lend
+then lets the sound go
 
-Cicadas sing loud
-heat bends the afternoon air
-no one moves at all
+We all turn to dust
+kings, harlots, jesters, and all
+and one grave for all
 
-River over stones
-the water keeps talking on
-none of us stop here
+Now the green comes back
+where yesteryear lay in ice
+and one small thrush sings
 
-Library quiet
-pages turning like small waves
-the sea under glass
+What doth a crown cost
+go ask the fields of the slain
+the dead still cry out
 
-Bike light in the dark
-a moving star along the road
-and home is close now
+This ink is black blood
+drawn from a heart that says no
+and it shall not die
 
-Fog swallows the hills
-the world grows small and quiet
-one lone black pine tree
+Now the clock strikes one
+and the long hall holds its breath
+and then sleeps again
 
-Late train, empty car
-my reflection rides along
-asleep by the glass
+Love is but a torch
+that burns the hand that holds it
+and will not be held
 
-Clouds over the peak
-the mountain wears a white scarf
-winter comes early
+Who watches the night
+when watchmen sleep at the gate
+and the moon walks round
 
-Spiders in the grass
-thin silk strung between the green
-dew holds the morning
+Far off a bell rings
+for one who will not come back
+and still no one knows
 
-Coffee going cold
-the meeting runs on and on
-the window turns gray
+The patient earth keeps
+all our small bones and our names
+and never asks more
 
-Swallows leave the eaves
-the nest waits under the roof
-spring returns again
+Speak, and then be still
+the whole wide world turns to hush
+and waits until dawn
 
-Wind through the wires
-power lines hum a low note
-and the dark keeps time
+Yet we pull no thread
+the dance goes on without us
+and we dance again
 
-Puddle in the road
-the whole sky fits in one step
-clouds under my shoe
-
-Old radio on
-voices from a summer past
-dust in the speaker
-
-Ants cross the kitchen
-a tiny parade of black
-the crumbs lead them home
-
-Sleeping city lights
-the window keeps a square of night
-I close my own eyes
-
-Bamboo after rain
-every joint remembers how
-to bend and stand up
-
-Snowflake on my sleeve
-it fades out before I blink
-winter signs in ink
-
-Bus stop in the rain
-everyone shares one small roof
-strangers stand closer
-
-Mango tree at noon
-fruit falls and the grass shakes once
-bees go back to sleep
-
-Lamps along the ward
-machines breathe in even time
-morning waits outside
-
-Bicycle bell rings
-the sound skips across the lane
-geese lift off slowly
+And so the day ends
+the candle gutters to ash
+and the morn comes on
