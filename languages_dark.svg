@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="420px" height="150px" font-size="11px">
 <rect width="420px" height="150px" rx="15" fill="#161b22"/>
 <text x="22" y="20" font-size="13" fill="#e6edf3">Languages</text>
-<path d="M78 84L78.0000 29.0000A55 55 0 0 1 126.1709 110.5436Z" fill="#3178c6" stroke="#161b22" stroke-width="1"/>
-<path d="M78 84L126.1709 110.5436A55 55 0 0 1 74.8605 138.9103Z" fill="#e34c26" stroke="#161b22" stroke-width="1"/>
-<path d="M78 84L74.8605 138.9103A55 55 0 0 1 31.1267 112.7731Z" fill="#4F5D95" stroke="#161b22" stroke-width="1"/>
-<path d="M78 84L31.1267 112.7731A55 55 0 0 1 23.0083 83.0432Z" fill="#3572A5" stroke="#161b22" stroke-width="1"/>
-<path d="M78 84L23.0083 83.0432A55 55 0 0 1 32.1351 53.6452Z" fill="#f7523f" stroke="#161b22" stroke-width="1"/>
-<path d="M78 84L32.1351 53.6452A55 55 0 0 1 45.5037 39.6267Z" fill="#663399" stroke="#161b22" stroke-width="1"/>
-<path d="M78 84L45.5037 39.6267A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#161b22" stroke-width="1"/>
+<path d="M78 84L78.0000 29.0000A55 55 0 0 1 126.3322 110.2487Z" fill="#3178c6" stroke="#161b22" stroke-width="1"/>
+<path d="M78 84L126.3322 110.2487A55 55 0 0 1 75.3782 138.9375Z" fill="#e34c26" stroke="#161b22" stroke-width="1"/>
+<path d="M78 84L75.3782 138.9375A55 55 0 0 1 31.4831 113.3458Z" fill="#4F5D95" stroke="#161b22" stroke-width="1"/>
+<path d="M78 84L31.4831 113.3458A55 55 0 0 1 23.0133 82.7915Z" fill="#3572A5" stroke="#161b22" stroke-width="1"/>
+<path d="M78 84L23.0133 82.7915A55 55 0 0 1 32.2235 53.5121Z" fill="#f7523f" stroke="#161b22" stroke-width="1"/>
+<path d="M78 84L32.2235 53.5121A55 55 0 0 1 45.5864 39.5662Z" fill="#663399" stroke="#161b22" stroke-width="1"/>
+<path d="M78 84L45.5864 39.5662A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#161b22" stroke-width="1"/>
 <circle cx="78" cy="84" r="30" fill="#161b22"/>
 <rect x="155" y="38" width="8" height="8" rx="2" fill="#3178c6"/>
 <text x="171" y="46" fill="#e6edf3">TypeScript</text>
