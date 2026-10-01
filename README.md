@@ -8,9 +8,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Love is but a torch*<br>*that burns the hand that holds it*<br>*and will not be held*
+*Who watches the night*<br>*when watchmen sleep at the gate*<br>*and the moon walks round*
 
-<sub>2026-09-30</sub>
+<sub>2026-10-01</sub>
 
 </div>
 <!-- haiku:end -->
