@@ -8,9 +8,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Far off a bell rings*<br>*for one who will not come back*<br>*and still no one knows*
+*The patient earth keeps*<br>*all our small bones and our names*<br>*and never asks more*
 
-<sub>2026-10-02</sub>
+<sub>2026-10-03</sub>
 
 </div>
 <!-- haiku:end -->
