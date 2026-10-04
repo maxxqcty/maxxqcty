@@ -8,9 +8,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*The patient earth keeps*<br>*all our small bones and our names*<br>*and never asks more*
+*Speak, and then be still*<br>*the whole wide world turns to hush*<br>*and waits until dawn*
 
-<sub>2026-10-03</sub>
+<sub>2026-10-04</sub>
 
 </div>
 <!-- haiku:end -->
