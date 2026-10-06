@@ -8,9 +8,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Yet we pull no thread*<br>*the dance goes on without us*<br>*and we dance again*
+*And so the day ends*<br>*the candle gutters to ash*<br>*and the morn comes on*
 
-<sub>2026-10-05</sub>
+<sub>2026-10-06</sub>
 
 </div>
 <!-- haiku:end -->
