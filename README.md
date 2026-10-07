@@ -8,9 +8,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*And so the day ends*<br>*the candle gutters to ash*<br>*and the morn comes on*
+*O fair Rose, thou art*<br>*too brief a flower for me*<br>*and summer must die*
 
-<sub>2026-10-06</sub>
+<sub>2026-10-07</sub>
 
 </div>
 <!-- haiku:end -->
