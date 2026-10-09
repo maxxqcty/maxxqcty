@@ -8,9 +8,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Doth dust remember*<br>*the dust that was a crowned king*<br>*no tongue shall reply*
+*We are but players*<br>*who act our parts in shadow*<br>*then fall the curtain*
 
-<sub>2026-10-08</sub>
+<sub>2026-10-09</sub>
 
 </div>
 <!-- haiku:end -->
