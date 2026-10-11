@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*The good year grows old*<br>*and swallows build against eaves*<br>*while summer still holds*
+*O look in the glass*<br>*the face that looks is not thine*<br>*but a mask of time*
 
-<sub>2026-10-10</sub>
+<sub>2026-10-11</sub>
 
 </div>
 <!-- haiku:end -->
