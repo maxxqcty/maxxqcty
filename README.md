@@ -5,16 +5,6 @@
   </picture>
 </p>
 
-<!-- haiku:start -->
-<div align="center">
-
-*The good year grows old*<br>*and swallows build against eaves*<br>*while summer still holds*
-
-<sub>2026-10-10</sub>
-
-</div>
-<!-- haiku:end -->
-
 
 <!-- [![Typing SVG](https://readme-typing-svg.demolab.com?font=Anonymous+Pro&weight=900&size=50&pause=1000&color=00F750&center=true&vCenter=true&random=true&width=900&height=100&lines=%3C+Hi%2C+my+name+is+maxxqcty....+%2F%3E;%3C+Welcome+to+my+profile!+%3A%29+%2F%3E)](https://git.io/typing-svg) -->
 
@@ -44,6 +34,15 @@
   </picture>
 </p>
 
+<!-- haiku:start -->
+<div align="center">
+
+*The good year grows old*<br>*and swallows build against eaves*<br>*while summer still holds*
+
+<sub>2026-10-10</sub>
+
+</div>
+<!-- haiku:end -->
 
 ## 🛠️ Tech Stack
 
