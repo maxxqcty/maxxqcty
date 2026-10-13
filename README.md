@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Now white winter comes*<br>*the black tree writes on the snow*<br>*and no man shall read*
+*Anon the long sleep*<br>*no drum shall wake the still house*<br>*not one may follow*
 
-<sub>2026-10-12</sub>
+<sub>2026-10-13</sub>
 
 </div>
 <!-- haiku:end -->
