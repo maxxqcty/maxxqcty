@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Anon the long sleep*<br>*no drum shall wake the still house*<br>*not one may follow*
+*O crown, thou art cold*<br>*and heavy with the dead kings*<br>*who first did wear it*
 
-<sub>2026-10-13</sub>
+<sub>2026-10-14</sub>
 
 </div>
 <!-- haiku:end -->
