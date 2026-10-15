@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*O crown, thou art cold*<br>*and heavy with the dead kings*<br>*who first did wear it*
+*The dead do not walk*<br>*yet still I hear them at night*<br>*calling out my name*
 
-<sub>2026-10-14</sub>
+<sub>2026-10-15</sub>
 
 </div>
 <!-- haiku:end -->
