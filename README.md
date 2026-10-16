@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*The dead do not walk*<br>*yet still I hear them at night*<br>*calling out my name*
+*Beauty is a rose*<br>*that knows the frost ere it falls*<br>*and bows its fair head*
 
-<sub>2026-10-15</sub>
+<sub>2026-10-16</sub>
 
 </div>
 <!-- haiku:end -->
