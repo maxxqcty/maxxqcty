@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Beauty is a rose*<br>*that knows the frost ere it falls*<br>*and bows its fair head*
+*And dust shall be king*<br>*when gold and marble are gone*<br>*and the throne is clay*
 
-<sub>2026-10-16</sub>
+<sub>2026-10-17</sub>
 
 </div>
 <!-- haiku:end -->
