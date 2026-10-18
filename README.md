@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*And dust shall be king*<br>*when gold and marble are gone*<br>*and the throne is clay*
+*How lone the night is*<br>*where owls repeat to the stones*<br>*the names of dead kings*
 
-<sub>2026-10-17</sub>
+<sub>2026-10-18</sub>
 
 </div>
 <!-- haiku:end -->
