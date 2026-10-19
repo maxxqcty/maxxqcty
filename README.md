@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*How lone the night is*<br>*where owls repeat to the stones*<br>*the names of dead kings*
+*Spin the long dark thread*<br>*no sword may cut what ye spin*<br>*nor stay the bright loom*
 
-<sub>2026-10-18</sub>
+<sub>2026-10-19</sub>
 
 </div>
 <!-- haiku:end -->
