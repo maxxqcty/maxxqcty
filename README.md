@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*A good name is wind*<br>*it passes through the loud town*<br>*and then is no more*
+*Old Time hath no shore*<br>*yet ev'ry wave returns sand*<br>*and all vanishes*
 
-<sub>2026-10-20</sub>
+<sub>2026-10-21</sub>
 
 </div>
 <!-- haiku:end -->
