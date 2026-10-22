@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Old Time hath no shore*<br>*yet ev'ry wave returns sand*<br>*and all vanishes*
+*The fire speaks low*<br>*to those who sit with the dead*<br>*in winter's dark rooms*
 
-<sub>2026-10-21</sub>
+<sub>2026-10-22</sub>
 
 </div>
 <!-- haiku:end -->
