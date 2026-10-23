@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*The fire speaks low*<br>*to those who sit with the dead*<br>*in winter's dark rooms*
+*I know not my heart*<br>*it beats beneath a false breast*<br>*like some dark traitor*
 
-<sub>2026-10-22</sub>
+<sub>2026-10-23</sub>
 
 </div>
 <!-- haiku:end -->
