@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="420px" height="150px" font-size="11px">
 <rect width="420px" height="150px" rx="15" fill="#f6f8fa"/>
 <text x="22" y="20" font-size="13" fill="#24292f">Languages</text>
-<path d="M78 84L78.0000 29.0000A55 55 0 0 1 129.9754 101.9877Z" fill="#e34c26" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L129.9754 101.9877A55 55 0 0 1 86.2407 138.3791Z" fill="#3178c6" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L86.2407 138.3791A55 55 0 0 1 34.5078 117.6664Z" fill="#3572A5" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L34.5078 117.6664A55 55 0 0 1 23.2196 79.0903Z" fill="#4F5D95" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L23.2196 79.0903A55 55 0 0 1 30.4728 56.3204Z" fill="#c1d026" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L30.4728 56.3204A55 55 0 0 1 41.7608 42.6270Z" fill="#3D6117" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L41.7608 42.6270A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L78.0000 29.0000A55 55 0 0 1 130.1363 101.5160Z" fill="#e34c26" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L130.1363 101.5160A55 55 0 0 1 86.7282 138.3030Z" fill="#3572A5" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L86.7282 138.3030A55 55 0 0 1 34.1529 117.2029Z" fill="#3178c6" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L34.1529 117.2029A55 55 0 0 1 23.2556 78.7041Z" fill="#4F5D95" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L23.2556 78.7041A55 55 0 0 1 30.6108 56.0846Z" fill="#c1d026" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L30.6108 56.0846A55 55 0 0 1 41.9027 42.5032Z" fill="#3D6117" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L41.9027 42.5032A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#f6f8fa" stroke-width="1"/>
 <circle cx="78" cy="84" r="30" fill="#f6f8fa"/>
 <rect x="155" y="38" width="8" height="8" rx="2" fill="#e34c26"/>
 <text x="171" y="46" fill="#24292f">HTML</text>
 <text x="410" y="46" text-anchor="end" fill="#8494ab">30%</text>
-<rect x="155" y="54" width="8" height="8" rx="2" fill="#3178c6"/>
-<text x="171" y="62" fill="#24292f">TypeScript</text>
+<rect x="155" y="54" width="8" height="8" rx="2" fill="#3572A5"/>
+<text x="171" y="62" fill="#24292f">Python</text>
 <text x="410" y="62" text-anchor="end" fill="#8494ab">17%</text>
-<rect x="155" y="70" width="8" height="8" rx="2" fill="#3572A5"/>
-<text x="171" y="78" fill="#24292f">Python</text>
+<rect x="155" y="70" width="8" height="8" rx="2" fill="#3178c6"/>
+<text x="171" y="78" fill="#24292f">TypeScript</text>
 <text x="410" y="78" text-anchor="end" fill="#8494ab">17%</text>
 <rect x="155" y="86" width="8" height="8" rx="2" fill="#4F5D95"/>
 <text x="171" y="94" fill="#24292f">PHP</text>
