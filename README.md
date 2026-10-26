@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Water keeps no word*<br>*it gives back the voice you lend*<br>*then lets the sound go*
+*We all turn to dust*<br>*kings, harlots, jesters, and all*<br>*and one grave for all*
 
-<sub>2026-10-25</sub>
+<sub>2026-10-26</sub>
 
 </div>
 <!-- haiku:end -->
