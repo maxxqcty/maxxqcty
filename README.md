@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Now the green comes back*<br>*where yesteryear lay in ice*<br>*and one small thrush sings*
+*What doth a crown cost*<br>*go ask the fields of the slain*<br>*the dead still cry out*
 
-<sub>2026-10-27</sub>
+<sub>2026-10-28</sub>
 
 </div>
 <!-- haiku:end -->
