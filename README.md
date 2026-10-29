@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*What doth a crown cost*<br>*go ask the fields of the slain*<br>*the dead still cry out*
+*This ink is black blood*<br>*drawn from a heart that says no*<br>*and it shall not die*
 
-<sub>2026-10-28</sub>
+<sub>2026-10-29</sub>
 
 </div>
 <!-- haiku:end -->
