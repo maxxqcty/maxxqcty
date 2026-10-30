@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*This ink is black blood*<br>*drawn from a heart that says no*<br>*and it shall not die*
+*Now the clock strikes one*<br>*and the long hall holds its breath*<br>*and then sleeps again*
 
-<sub>2026-10-29</sub>
+<sub>2026-10-30</sub>
 
 </div>
 <!-- haiku:end -->
