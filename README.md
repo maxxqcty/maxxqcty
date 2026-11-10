@@ -37,9 +37,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*We are but players*<br>*who act our parts in shadow*<br>*then fall the curtain*
+*The good year grows old*<br>*and swallows build against eaves*<br>*while summer still holds*
 
-<sub>2026-11-09</sub>
+<sub>2026-11-10</sub>
 
 </div>
 <!-- haiku:end -->
