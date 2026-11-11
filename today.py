@@ -35,6 +35,10 @@ MAX_ATTEMPTS = 3
 RETRYABLE_STATUSES = (403, 429, 500, 502, 503, 504)
 
 
+class TokenError(Exception):
+    """Raised when GitHub rejects the ACCESS_TOKEN (HTTP 401)."""
+
+
 def simple_request(func_name, query, variables):
     """
     Returns a request, or raises an Exception if the response does not succeed.
@@ -46,6 +50,8 @@ def simple_request(func_name, query, variables):
     last_error = None
     for attempt in range(1, MAX_ATTEMPTS + 1):
         request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
+        if request.status_code == 401:
+            raise TokenError('ACCESS_TOKEN is invalid or expired; regenerate it and update the repository secret')
         if request.status_code == 200:
             payload = request.json()
             if isinstance(payload, dict) and payload.get('errors'):
