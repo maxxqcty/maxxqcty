@@ -155,7 +155,7 @@ def test_shipped_readme_contains_the_haiku_markers():
 
 def test_haiku_section_sits_above_the_badges():
     text = README_FILE.read_text(encoding='utf-8')
-    assert text.index(haiku.MARKER_START) < text.index('dark_mode.svg')
+    assert text.index(haiku.MARKER_START) < text.index('FRONTEND')
 
 
 def test_daily_haiku_heading_is_gone():
