@@ -1,33 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="420px" height="150px" font-size="11px">
 <rect width="420px" height="150px" rx="15" fill="#f6f8fa"/>
 <text x="22" y="20" font-size="13" fill="#24292f">Languages</text>
-<path d="M78 84L78.0000 29.0000A55 55 0 0 1 132.9748 85.6654Z" fill="#e34c26" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L132.9748 85.6654A55 55 0 0 1 81.6863 138.8763Z" fill="#3572A5" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L81.6863 138.8763A55 55 0 0 1 25.8374 101.4374Z" fill="#3178c6" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L25.8374 101.4374A55 55 0 0 1 25.5533 67.4366Z" fill="#4F5D95" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L25.5533 67.4366A55 55 0 0 1 35.0221 49.6794Z" fill="#c1d026" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L35.0221 49.6794A55 55 0 0 1 45.8344 39.3864Z" fill="#3D6117" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L45.8344 39.3864A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L78.0000 29.0000A55 55 0 0 1 132.6271 90.3939Z" fill="#e34c26" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L132.6271 90.3939A55 55 0 0 1 74.1851 138.8675Z" fill="#3572A5" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L74.1851 138.8675A55 55 0 0 1 36.6105 120.2203Z" fill="#3178c6" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L36.6105 120.2203A55 55 0 0 1 23.1109 87.4917Z" fill="#4F5D95" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L23.1109 87.4917A55 55 0 0 1 25.7947 66.6908Z" fill="#c1d026" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L25.7947 66.6908A55 55 0 0 1 33.6562 51.4634Z" fill="#f1e05a" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L33.6562 51.4634A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#f6f8fa" stroke-width="1"/>
 <circle cx="78" cy="84" r="30" fill="#f6f8fa"/>
 <rect x="155" y="38" width="8" height="8" rx="2" fill="#e34c26"/>
 <text x="171" y="46" fill="#24292f">HTML</text>
-<text x="410" y="46" text-anchor="end" fill="#8494ab">25%</text>
+<text x="410" y="46" text-anchor="end" fill="#8494ab">27%</text>
 <rect x="155" y="54" width="8" height="8" rx="2" fill="#3572A5"/>
 <text x="171" y="62" fill="#24292f">Python</text>
-<text x="410" y="62" text-anchor="end" fill="#8494ab">23%</text>
+<text x="410" y="62" text-anchor="end" fill="#8494ab">24%</text>
 <rect x="155" y="70" width="8" height="8" rx="2" fill="#3178c6"/>
 <text x="171" y="78" fill="#24292f">TypeScript</text>
-<text x="410" y="78" text-anchor="end" fill="#8494ab">21%</text>
+<text x="410" y="78" text-anchor="end" fill="#8494ab">12%</text>
 <rect x="155" y="86" width="8" height="8" rx="2" fill="#4F5D95"/>
 <text x="171" y="94" fill="#24292f">PHP</text>
 <text x="410" y="94" text-anchor="end" fill="#8494ab">10%</text>
 <rect x="155" y="102" width="8" height="8" rx="2" fill="#c1d026"/>
 <text x="171" y="110" fill="#24292f">Twig</text>
 <text x="410" y="110" text-anchor="end" fill="#8494ab">6%</text>
-<rect x="155" y="118" width="8" height="8" rx="2" fill="#3D6117"/>
-<text x="171" y="126" fill="#24292f">TeX</text>
-<text x="410" y="126" text-anchor="end" fill="#8494ab">4%</text>
+<rect x="155" y="118" width="8" height="8" rx="2" fill="#f1e05a"/>
+<text x="171" y="126" fill="#24292f">JavaScript</text>
+<text x="410" y="126" text-anchor="end" fill="#8494ab">5%</text>
 <rect x="155" y="134" width="8" height="8" rx="2" fill="#8b949e"/>
 <text x="171" y="142" fill="#24292f">Other</text>
-<text x="410" y="142" text-anchor="end" fill="#8494ab">10%</text>
+<text x="410" y="142" text-anchor="end" fill="#8494ab">15%</text>
 </svg>
