@@ -32,9 +32,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*O look in the glass*<br>*the face that looks is not thine*<br>*but a mask of time*
+*Now white winter comes*<br>*the black tree writes on the snow*<br>*and no man shall read*
 
-<sub>2026-11-11</sub>
+<sub>2026-11-12</sub>
 
 </div>
 <!-- haiku:end -->
