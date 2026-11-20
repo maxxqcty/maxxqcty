@@ -32,9 +32,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*Spin the long dark thread*<br>*no sword may cut what ye spin*<br>*nor stay the bright loom*
+*A good name is wind*<br>*it passes through the loud town*<br>*and then is no more*
 
-<sub>2026-11-19</sub>
+<sub>2026-11-20</sub>
 
 </div>
 <!-- haiku:end -->
