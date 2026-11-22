@@ -1,33 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="420px" height="150px" font-size="11px">
 <rect width="420px" height="150px" rx="15" fill="#f6f8fa"/>
 <text x="22" y="20" font-size="13" fill="#24292f">Languages</text>
-<path d="M78 84L78.0000 29.0000A55 55 0 0 1 132.8551 80.0102Z" fill="#3572A5" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L132.8551 80.0102A55 55 0 0 1 87.0129 138.2565Z" fill="#e34c26" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L87.0129 138.2565A55 55 0 0 1 44.3480 127.5034Z" fill="#3178c6" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L44.3480 127.5034A55 55 0 0 1 23.7884 93.2794Z" fill="#f1e05a" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L23.7884 93.2794A55 55 0 0 1 26.6300 64.3500Z" fill="#4F5D95" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L26.6300 64.3500A55 55 0 0 1 35.1813 49.4811Z" fill="#c1d026" stroke="#f6f8fa" stroke-width="1"/>
-<path d="M78 84L35.1813 49.4811A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L78.0000 29.0000A55 55 0 0 1 131.4191 70.9079Z" fill="#e34c26" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L131.4191 70.9079A55 55 0 0 1 103.5653 132.6972Z" fill="#3572A5" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L103.5653 132.6972A55 55 0 0 1 38.6758 122.4527Z" fill="#f1e05a" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L38.6758 122.4527A55 55 0 0 1 23.0606 86.5814Z" fill="#3178c6" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L23.0606 86.5814A55 55 0 0 1 27.9083 61.2884Z" fill="#4F5D95" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L27.9083 61.2884A55 55 0 0 1 38.0453 46.2029Z" fill="#663399" stroke="#f6f8fa" stroke-width="1"/>
+<path d="M78 84L38.0453 46.2029A55 55 0 0 1 78.0000 29.0000Z" fill="#8b949e" stroke="#f6f8fa" stroke-width="1"/>
 <circle cx="78" cy="84" r="30" fill="#f6f8fa"/>
-<rect x="155" y="38" width="8" height="8" rx="2" fill="#3572A5"/>
-<text x="171" y="46" fill="#24292f">Python</text>
-<text x="410" y="46" text-anchor="end" fill="#8494ab">24%</text>
-<rect x="155" y="54" width="8" height="8" rx="2" fill="#e34c26"/>
-<text x="171" y="62" fill="#24292f">HTML</text>
-<text x="410" y="62" text-anchor="end" fill="#8494ab">24%</text>
-<rect x="155" y="70" width="8" height="8" rx="2" fill="#3178c6"/>
-<text x="171" y="78" fill="#24292f">TypeScript</text>
-<text x="410" y="78" text-anchor="end" fill="#8494ab">13%</text>
-<rect x="155" y="86" width="8" height="8" rx="2" fill="#f1e05a"/>
-<text x="171" y="94" fill="#24292f">JavaScript</text>
+<rect x="155" y="38" width="8" height="8" rx="2" fill="#e34c26"/>
+<text x="171" y="46" fill="#24292f">HTML</text>
+<text x="410" y="46" text-anchor="end" fill="#8494ab">21%</text>
+<rect x="155" y="54" width="8" height="8" rx="2" fill="#3572A5"/>
+<text x="171" y="62" fill="#24292f">Python</text>
+<text x="410" y="62" text-anchor="end" fill="#8494ab">21%</text>
+<rect x="155" y="70" width="8" height="8" rx="2" fill="#f1e05a"/>
+<text x="171" y="78" fill="#24292f">JavaScript</text>
+<text x="410" y="78" text-anchor="end" fill="#8494ab">20%</text>
+<rect x="155" y="86" width="8" height="8" rx="2" fill="#3178c6"/>
+<text x="171" y="94" fill="#24292f">TypeScript</text>
 <text x="410" y="94" text-anchor="end" fill="#8494ab">12%</text>
 <rect x="155" y="102" width="8" height="8" rx="2" fill="#4F5D95"/>
 <text x="171" y="110" fill="#24292f">PHP</text>
-<text x="410" y="110" text-anchor="end" fill="#8494ab">9%</text>
-<rect x="155" y="118" width="8" height="8" rx="2" fill="#c1d026"/>
-<text x="171" y="126" fill="#24292f">Twig</text>
+<text x="410" y="110" text-anchor="end" fill="#8494ab">8%</text>
+<rect x="155" y="118" width="8" height="8" rx="2" fill="#663399"/>
+<text x="171" y="126" fill="#24292f">CSS</text>
 <text x="410" y="126" text-anchor="end" fill="#8494ab">5%</text>
 <rect x="155" y="134" width="8" height="8" rx="2" fill="#8b949e"/>
 <text x="171" y="142" fill="#24292f">Other</text>
-<text x="410" y="142" text-anchor="end" fill="#8494ab">14%</text>
+<text x="410" y="142" text-anchor="end" fill="#8494ab">13%</text>
 </svg>
