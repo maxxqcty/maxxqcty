@@ -32,9 +32,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*And we are small ships*<br>*on seas that no man has mapped*<br>*and then the night comes*
+*Water keeps no word*<br>*it gives back the voice you lend*<br>*then lets the sound go*
 
-<sub>2026-11-24</sub>
+<sub>2026-11-25</sub>
 
 </div>
 <!-- haiku:end -->
