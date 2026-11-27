@@ -32,9 +32,9 @@
 <!-- haiku:start -->
 <div align="center">
 
-*We all turn to dust*<br>*kings, harlots, jesters, and all*<br>*and one grave for all*
+*Now the green comes back*<br>*where yesteryear lay in ice*<br>*and one small thrush sings*
 
-<sub>2026-11-26</sub>
+<sub>2026-11-27</sub>
 
 </div>
 <!-- haiku:end -->
